@@ -17,7 +17,7 @@
                         {{-- <span class="d-sm-inline d-none">Admin</span> --}}
                         <span class="d-sm-inline d-none">{{ auth()->user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <form action="/logout" method="POST">
                                 @csrf

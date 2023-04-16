@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SupervisorAssessmentController;
+use App\Http\Controllers\SupervisorDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
-//admin Controller 
+//admin Route 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
     Route::get('manage-mahasiswa', [AdminStudentController::class, 'index']);
@@ -35,6 +37,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('manage-dpl', AdminSupervisorController::class);
     Route::resource('aspek-penilaian', AssesmentAspectController::class);
     Route::resource('manage-magang', InternshipController::class);
+});
+
+//Pembimbing Route
+Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
+    Route::get('dashboard-pembimbing', [SupervisorDashboardController::class, 'index']);
+    Route::get('penilaian', [SupervisorAssessmentController::class, 'index']);
+    Route::get('penilaian/{registration_number}', [SupervisorAssessmentController::class, 'show']);
+    Route::get('penilaian/{registration_number}/edit', [SupervisorAssessmentController::class, 'edit']);
+    Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
+    Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
 });
 
 //auth Controller

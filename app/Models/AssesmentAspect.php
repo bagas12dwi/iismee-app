@@ -13,6 +13,11 @@ class AssesmentAspect extends Model
 
     public function subjec()
     {
-        $this->belongsTo('App\Models\Subject');
+        return $this->belongsTo('App\Models\Subject');
+    }
+
+    public function assessment()
+    {
+        return $this->hasMany('App\Models\Assessment');
     }
 }

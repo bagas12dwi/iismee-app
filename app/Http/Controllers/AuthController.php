@@ -51,7 +51,7 @@ class AuthController extends Controller
         } elseif ($level == 'pembimbing') {
             if (Auth::attempt($inputan)) {
                 $request->session()->regenerate();
-                return redirect()->intended('/pembimbing');
+                return redirect()->intended('/dashboard-pembimbing');
             }
             return back()->with('errorLogin', 'Login Gagal !');
         } elseif ($level == 'mahasiswa') {

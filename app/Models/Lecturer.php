@@ -30,4 +30,9 @@ class Lecturer extends Model
     {
         return $this->hasMany('App\Models\Internship');
     }
+
+    public function assessment()
+    {
+        return $this->hasMany('App\Models\Assessment');
+    }
 }

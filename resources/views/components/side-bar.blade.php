@@ -4,7 +4,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" # " target="_blank">
-            <span class="ms-1 font-weight-bold">IISMEE Admin</span>
+            <span class="ms-1 font-weight-bold">IISMEE {{ auth()->user()->level }}</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -128,9 +128,9 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->level === 'dosen')
+            @if (auth()->user()->level === 'pembimbing')
                 <li class="nav-item">
-                    <a class="nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" href="/dashboard-admin">
+                    <a class="nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" href="/dashboard-pembimbing">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -154,6 +154,21 @@
                             </svg>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $title === 'Penilaian' ? 'active' : '' }} " href="/penilaian">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Penilaian</span>
                     </a>
                 </li>
             @endif

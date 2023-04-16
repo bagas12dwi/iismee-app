@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('class');
             $table->string('company_name');
-            $table->string('company_address');
+            $table->text('company_address');
             $table->string('company_number');
             $table->string('division');
             $table->string('internship_type');
