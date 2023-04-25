@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\IndustrialAdviserController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ReportController;
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('manage-magang', InternshipController::class);
     Route::resource('manage-perusahaan', CompanyController::class);
     Route::get('getDataPerusahaan', [AdminStudentController::class, 'getDataPerusahaan']);
+    Route::resource('manage-pembimbing-industri', IndustrialAdviserController::class);
 });
 
 //Pembimbing Route

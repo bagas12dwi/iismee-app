@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->string('email');
             $table->string('phone_number');
             $table->string('position');
-            $table->unsignedBigInteger('companies_id');
-            $table->foreign('companies_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

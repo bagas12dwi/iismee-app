@@ -13,6 +13,11 @@ class Company extends Model
 
     public function students()
     {
-        return $this->hasMany('App\Model\Student');
+        return $this->hasMany('App\Models\Student');
+    }
+
+    public function industrialAdvisers()
+    {
+        return $this->hasMany('App\Models\IndustrialAdviser');
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->text('description');
         });
     }
 
