@@ -21,6 +21,11 @@
                         value="{{ old('subject_name', $matakuliah->subject_name) }}">
                 </div>
                 <div class="mb-3">
+                    <label for="sks" class="form-label">Nama Mata Kuliah</label>
+                    <input type="text" class="form-control" name="sks" id="sks"
+                        value="{{ old('sks', $matakuliah->sks) }}">
+                </div>
+                <div class="mb-3">
                     <label for="lecturer_id" class="form-label">Dosen Pengajar</label>
                     <select class="form-select" name="lecturer_id" id="lecturer_id" aria-label="Default select example">
                         <option selected>Pilih Dosen Pengajar</option>

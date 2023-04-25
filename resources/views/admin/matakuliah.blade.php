@@ -29,6 +29,7 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Mata
                                     Kuliah</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SKS</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIP
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Dosen
@@ -44,6 +45,13 @@
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
                                                 {{ $data->subject_name }}
+                                            </h6>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">
+                                                {{ $data->sks }}
                                             </h6>
                                         </div>
                                     </td>
