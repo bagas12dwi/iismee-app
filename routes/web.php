@@ -7,8 +7,12 @@ use App\Http\Controllers\AdminSupervisorController;
 use App\Http\Controllers\AssesmentAspectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\InternshipController;
+use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +51,15 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::get('penilaian/{registration_number}/edit', [SupervisorAssessmentController::class, 'edit']);
     Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
+});
+
+// Mahasiswa Route
+Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
+    Route::resource('mahasiswa', StudentController::class);
+    Route::resource('magang', StudentInternshipController::class);
+    Route::resource('logbook', LogbookController::class);
+    Route::post('upload-dokumen', [DocumentController::class, 'store']);
+    Route::resource('laporan', ReportController::class);
 });
 
 //auth Controller

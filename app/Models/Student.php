@@ -19,11 +19,26 @@ class Student extends Model
 
     public function internship()
     {
-        return $this->hasMany('App\Models\Internship');
+        return $this->hasOne('App\Models\Internship');
     }
 
     public function assessment()
     {
         return $this->hasMany('App\Models\Assessment');
+    }
+
+    public function logbook()
+    {
+        return $this->hasMany('App\Models\Logbook');
+    }
+
+    public function document()
+    {
+        return $this->hasMany('App\Models\Document');
+    }
+
+    public function report()
+    {
+        return $this->hasMany('App\Models\Report');
     }
 }

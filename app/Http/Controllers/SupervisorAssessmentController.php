@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AssesmentAspect;
 use App\Models\Assessment;
+use App\Models\Document;
 use App\Models\Internship;
 use App\Models\Lecturer;
 use App\Models\Student;
@@ -19,8 +20,22 @@ class SupervisorAssessmentController extends Controller
         $email = auth()->user()->email;
         $dosen = Lecturer::where('email', '=', $email)->firstOrFail();
 
-        $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*')->where('lecturer_id', $dosen->id)->get();
-        // dd($is_assessment);
+        // $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path')
+        //     ->leftJoin('students', 'internships.student_id', '=', 'students.id')
+        //     ->leftJoin('documents', 'students.id', '=', 'documents.student_id')
+        //     ->where('lecturer_id', $dosen->id)
+        //     ->where('documents.type', '=', 'Surat Persetujuan Magang')
+        //     ->get();
+
+        $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path')
+            ->leftJoin('students', 'internships.student_id', '=', 'students.id')
+            ->leftJoin('documents', function ($join) {
+                $join->on('students.id', '=', 'documents.student_id')
+                    ->where('documents.type', '=', 'Surat Persetujuan Magang');
+            })
+            ->where('lecturer_id', $dosen->id)
+            ->get();
+
 
         return view('pembimbing.penilaian', [
             'title' => 'Penilaian',
