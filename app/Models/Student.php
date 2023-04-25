@@ -41,4 +41,9 @@ class Student extends Model
     {
         return $this->hasMany('App\Models\Report');
     }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
 }

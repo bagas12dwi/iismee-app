@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminSupervisorController;
 use App\Http\Controllers\AssesmentAspectController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\InternshipController;
@@ -41,6 +42,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('manage-dpl', AdminSupervisorController::class);
     Route::resource('aspek-penilaian', AssesmentAspectController::class);
     Route::resource('manage-magang', InternshipController::class);
+    Route::resource('manage-perusahaan', CompanyController::class);
+    Route::get('getDataPerusahaan', [AdminStudentController::class, 'getDataPerusahaan']);
 });
 
 //Pembimbing Route

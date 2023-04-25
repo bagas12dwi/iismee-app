@@ -49,16 +49,21 @@
             </div>
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="company_name" class="form-label">Nama Perusahaan</label>
-                    <input type="text" class="form-control" name="company_name" id="company_name">
+                    <label for="company_id" class="form-label">Nama Perusahaan</label>
+                    <select class="form-select" name="company_id" id="company_id" aria-label="Default select example">
+                        <option selected>Pilih Perusahaan</option>
+                        @foreach ($perusahaan as $item)
+                            <option value="{{ $item->id }}">{{ $item->company_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="company_number" class="form-label">No. Telepon Perusahaan</label>
-                    <input type="number" class="form-control" name="company_number" id="company_number">
+                    <input type="number" class="form-control" name="company_number" id="company_number" readonly disabled>
                 </div>
                 <div class="mb-3">
                     <label for="company_address" class="form-label">Alamat Perusahaan</label>
-                    <textarea class="form-control" name="company_address" id="company_address" rows="3"></textarea>
+                    <textarea class="form-control" name="company_address" id="company_address" rows="3" readonly disabled></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="division" class="form-label">Divisi</label>
@@ -78,3 +83,23 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
+
+@push('script')
+    <script>
+        $('#company_id').change(function() {
+            var company_id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '/getDataPerusahaan',
+                data: {
+                    company_id: company_id
+                },
+                success: function(data) {
+                    $('#company_number').val(data.company_number);
+                    $('#company_address').val(data.company_address);
+                }
+            });
+        });
+    </script>
+@endpush

@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('class');
-            $table->string('company_name');
-            $table->text('company_address');
-            $table->string('company_number');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')->constrained();
             $table->string('division');
             $table->string('internship_type');
             $table->date('date_start');

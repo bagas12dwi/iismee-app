@@ -71,7 +71,7 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $data->company_name }}
+                                                {{ $data->company->company_name }}
                                             </h6>
                                         </div>
                                     </td>
@@ -85,7 +85,7 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $data->company_address }}
+                                                {{ $data->company->company_address }}
                                             </h6>
                                         </div>
                                     </td>

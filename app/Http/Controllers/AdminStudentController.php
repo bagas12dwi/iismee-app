@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminStudentController extends Controller
 {
@@ -15,15 +17,23 @@ class AdminStudentController extends Controller
     {
         return view('admin.mahasiswa', [
             'title' => 'Mahasiswa',
-            'data' => Student::all()
+            'data' => Student::with('company')->get()
         ]);
     }
 
     public function indexTambahMahasiswa()
     {
         return view('admin.add-mahasiswa', [
-            'title' => 'Tambah Mahasiswa'
+            'title' => 'Tambah Mahasiswa',
+            'perusahaan' => Company::all()
         ]);
+    }
+
+    public function getDataPerusahaan(Request $request)
+    {
+        $selectValue = $request->input('company_id');
+        $value = DB::table('companies')->where('id', $selectValue)->first();
+        return response()->json($value);
     }
 
     /**
@@ -46,9 +56,7 @@ class AdminStudentController extends Controller
             'class' => 'required',
             'date_start' => 'required',
             'date_end' => 'required',
-            'company_name' => 'required',
-            'company_number' => 'required',
-            'company_address' => 'required',
+            'company_id' => 'required',
             'division' => 'required',
             'internship_type' => 'required',
         ]);
@@ -83,7 +91,8 @@ class AdminStudentController extends Controller
     {
         return view('admin.edit-mahasiswa', [
             'mahasiswa' => $manage_mahasiswa,
-            'title' => 'Edit Mahasiswa'
+            'title' => 'Edit Mahasiswa',
+            'perusahaan' => Company::all()
         ]);
     }
 
@@ -92,24 +101,22 @@ class AdminStudentController extends Controller
      */
     public function update(Request $request, Student $manage_mahasiswa)
     {
-        $validatedData = $request->validate([
+        $rules = [
             'registration_number' => 'required',
             'name' => 'required',
-            'email' => 'required|email',
             'class' => 'required',
             'date_start' => 'required',
             'date_end' => 'required',
-            'company_name' => 'required',
-            'company_number' => 'required',
-            'company_address' => 'required',
+            'company_id' => 'required',
             'division' => 'required',
             'internship_type' => 'required',
-        ]);
+        ];
 
-        if ($validatedData['name'] != $manage_mahasiswa->name || $validatedData['email'] != $manage_mahasiswa->email) {
+        $validatedData = $request->validate($rules);
+
+        if ($rules['name'] != $manage_mahasiswa->name) {
             $validateCreateUser = $request->validate([
                 'name' => 'required',
-                'email' => 'required | email'
             ]);
         }
 

@@ -86,13 +86,13 @@ class AdminLecturerController extends Controller
         ];
 
         if ($request->lecturer_id_number != $manage_dosen->lecturer_id_number || $request->email != $manage_dosen->email) {
-            $rules['lecturer_id_number'] =  'required|unique:lecturers';
-            $rules['email'] =  'required|email|unique:lecturers';
+            $rules['lecturer_id_number'] =  'required|unique:lecturers,lecturer_id_number,' . $manage_dosen->id;
+            $rules['email'] =  'email|unique:lecturers,email,' . $manage_dosen->id;
         }
 
         $validatedData = $request->validate($rules);
 
-        if ($validatedData['name'] != $manage_dosen->name) {
+        if ($rules['name'] != $manage_dosen->name) {
             $validateCreateUser = $request->validate([
                 'name' => 'required',
             ]);
