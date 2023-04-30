@@ -42,7 +42,8 @@ class AssesmentAspectController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'description' => 'required'
         ]);
 
         AssesmentAspect::create($validatedData);
@@ -76,7 +77,8 @@ class AssesmentAspectController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'description' => 'required'
         ]);
 
         AssesmentAspect::where('id', $aspek_penilaian->id)->update($validatedData);

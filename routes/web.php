@@ -35,8 +35,8 @@ Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 //admin Route 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
-    Route::get('manage-mahasiswa', [AdminStudentController::class, 'index']);
-    Route::get('add-mahasiswa', [AdminStudentController::class, 'indexTambahMahasiswa']);
+    // Route::get('manage-mahasiswa', [AdminStudentController::class, 'index']);
+    // Route::get('add-mahasiswa', [AdminStudentController::class, 'indexTambahMahasiswa']);
     Route::resource('manage-mahasiswa', AdminStudentController::class);
     Route::resource('manage-dosen', AdminLecturerController::class);
     Route::resource('manage-matakuliah', AdminSubjectController::class);

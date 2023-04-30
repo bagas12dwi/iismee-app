@@ -75,6 +75,9 @@
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                             Aspek Penilaian</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Deskripsi</th>
                                                         <th class="text-secondary opacity-7"></th>
                                                     </tr>
                                                 </thead>
@@ -85,6 +88,13 @@
                                                                 <div class="my-auto">
                                                                     <h6 class="mb-0 text-sm">
                                                                         {{ $aspek->name }}
+                                                                    </h6>
+                                                                </div>
+                                                            </td>
+                                                            <td style="white-space: normal !important">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">
+                                                                        {{ $aspek->description }}
                                                                     </h6>
                                                                 </div>
                                                             </td>

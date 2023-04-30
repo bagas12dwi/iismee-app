@@ -18,6 +18,10 @@
                     <label for="name" class="form-label">Aspek Penilaian</label>
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Deskripsi Penilaian</label>
+                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
