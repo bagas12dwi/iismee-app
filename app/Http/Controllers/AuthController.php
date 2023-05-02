@@ -14,9 +14,22 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('auth.login', [
-            'title' => 'Login'
-        ]);
+
+        if (auth()->user() != null) {
+            if (auth()->user()->level == 'admin') {
+                return redirect()->intended('/dashboard-admin');
+            } elseif (auth()->user()->level == 'pembimbing') {
+                return redirect()->intended('/dashboard-pembimbing');
+            } elseif (auth()->user()->level == 'mahasiswa') {
+                return redirect()->intended('/mahasiswa');
+            } elseif (auth()->user()->level == 'pembimbing industri') {
+                return redirect()->intended('/dashboard-pembimbing-industri');
+            }
+        } else {
+            return view('auth.login', [
+                'title' => 'Login'
+            ]);
+        }
     }
 
     public function login(Request $request)
@@ -36,22 +49,31 @@ class AuthController extends Controller
                 return redirect()->intended('/dashboard-admin');
             }
             return back()->with('errorLogin', 'Login Gagal !');
-        } elseif ($level == 'user') {
-            if (Auth::attempt($inputan)) {
-                $request->session()->regenerate();
-                return redirect()->intended('/user');
-            }
-            return back()->with('errorLogin', 'Login Gagal !');
-        } elseif ($level == 'dosen') {
-            if (Auth::attempt($inputan)) {
-                $request->session()->regenerate();
-                return redirect()->intended('/dosen');
-            }
-            return back()->with('errorLogin', 'Login Gagal !');
-        } elseif ($level == 'pembimbing') {
+        }
+        //  elseif ($level == 'user') {
+        //     if (Auth::attempt($inputan)) {
+        //         $request->session()->regenerate();
+        //         return redirect()->intended('/user');
+        //     }
+        //     return back()->with('errorLogin', 'Login Gagal !');
+        // } 
+        // elseif ($level == 'dosen') {
+        //     if (Auth::attempt($inputan)) {
+        //         $request->session()->regenerate();
+        //         return redirect()->intended('/dosen');
+        //     }
+        //     return back()->with('errorLogin', 'Login Gagal !');
+        // } 
+        elseif ($level == 'pembimbing') {
             if (Auth::attempt($inputan)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/dashboard-pembimbing');
+            }
+            return back()->with('errorLogin', 'Login Gagal !');
+        } elseif ($level == 'pembimbing industri') {
+            if (Auth::attempt($inputan)) {
+                $request->session()->regenerate();
+                return redirect()->intended('/dashboard-pembimbing-industri');
             }
             return back()->with('errorLogin', 'Login Gagal !');
         } elseif ($level == 'mahasiswa') {

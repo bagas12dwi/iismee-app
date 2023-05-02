@@ -15,4 +15,8 @@ class IndustrialAdviser extends Model
     {
         return $this->belongsTo('App\Models\Company');
     }
+    public function industrialAssessment()
+    {
+        return $this->hasMany('App\Models\IndustrialAssessment');
+    }
 }

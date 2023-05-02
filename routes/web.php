@@ -10,6 +10,8 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\IndustrialAdviserController;
+use App\Http\Controllers\IndustrialAssessmentController;
+use App\Http\Controllers\IndustrialDashboardController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ReportController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
+use App\Models\IndustrialAssessment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,13 +33,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'index'])->middleware('guest');
+Route::get('/', [AuthController::class, 'index'])->name('login');
+
 
 //admin Route 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
     // Route::get('manage-mahasiswa', [AdminStudentController::class, 'index']);
-    // Route::get('add-mahasiswa', [AdminStudentController::class, 'indexTambahMahasiswa']);
+    Route::get('add-mahasiswa', [AdminStudentController::class, 'indexTambahMahasiswa']);
     Route::resource('manage-mahasiswa', AdminStudentController::class);
     Route::resource('manage-dosen', AdminLecturerController::class);
     Route::resource('manage-matakuliah', AdminSubjectController::class);
@@ -56,6 +60,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::get('penilaian/{registration_number}/edit', [SupervisorAssessmentController::class, 'edit']);
     Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
+});
+
+// Pembimbing Industri Route
+Route::group(['middleware' => ['auth', "ceklevel:pembimbing industri"]], function () {
+    Route::get('dashboard-pembimbing-industri', [IndustrialDashboardController::class, 'index']);
+    Route::get('penilaian-industri', [IndustrialAssessmentController::class, 'index']);
+    Route::get('penilaian-industri/{registration_number}', [IndustrialAssessmentController::class, 'show']);
+    Route::get('penilaian-industri/{registration_number}/edit', [IndustrialAssessmentController::class, 'edit']);
+    Route::post('penilaian-industri', [IndustrialAssessmentController::class, 'store']);
+    Route::put('penilaian-industri', [IndustrialAssessmentController::class, 'update']);
 });
 
 // Mahasiswa Route

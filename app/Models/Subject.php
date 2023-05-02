@@ -30,4 +30,9 @@ class Subject extends Model
     {
         return $this->hasMany('App\Models\Assessment');
     }
+
+    public function industrialAssessment()
+    {
+        return $this->hasMany('App\Models\IndustrialAssessment');
+    }
 }
