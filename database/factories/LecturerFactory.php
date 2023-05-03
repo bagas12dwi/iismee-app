@@ -17,7 +17,10 @@ class LecturerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'lecturer_id_number' => $this->faker->randomNumber(5, true),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->freeEmail(),
+            'phone_number' => $this->faker->phoneNumber()
         ];
     }
 }

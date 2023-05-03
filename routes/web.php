@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\CustomHelper;
 use App\Http\Controllers\AdminLecturerController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
@@ -19,7 +20,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
-use App\Models\IndustrialAssessment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,3 +85,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
 Route::get('login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
+
+Route::get('generate', [CustomHelper::class, 'generateRandomData']);

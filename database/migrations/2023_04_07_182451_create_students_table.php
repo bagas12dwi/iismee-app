@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->constrained();
             $table->string('division');
             $table->string('internship_type');
+            $table->string('img_path')->nullable();
             $table->date('date_start');
             $table->date('date_end');
         });

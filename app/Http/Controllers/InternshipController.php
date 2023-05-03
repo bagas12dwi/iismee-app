@@ -32,7 +32,7 @@ class InternshipController extends Controller
         return view('admin.add-magang', [
             'title' => 'Tambahkan Data Magang',
             'dosen' => Supervisor::all(),
-            'data' => Student::whereNotIn('id', function ($query) {
+            'mhs' => Student::whereNotIn('id', function ($query) {
                 $query->select('student_id')->from('internships');
             })->get()
         ]);
@@ -43,12 +43,24 @@ class InternshipController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+
+        $request->validate([
             'lecturer_id' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required|array|min:1'
         ]);
 
-        Internship::create($validatedData);
+        $input = $request->all();
+        $lecturerId = $input['lecturer_id'];
+        $studentIds = $request->input('tambahkan');
+
+        $data = [
+            'lecturer_id' => $lecturerId,
+            'student_id' => $studentIds
+        ];
+
+        // dd($validatedData['student_id']);
+
+        Internship::create($data);
         return redirect()->intended('/manage-magang/create')->with('success', 'Data Berhasil Ditambahkan !');
     }
 
@@ -58,12 +70,24 @@ class InternshipController extends Controller
     public function show(Internship $manage_magang)
     {
         // dd($manage_magang->lecturer_id);
+        $data = Internship::select('internships.*', 'companies.*')
+            ->join('students', 'students.id', '=', 'internships.student_id')
+            ->join('companies', 'companies.id', '=', 'students.company_id')
+            ->where('internships.lecturer_id', $manage_magang->lecturer_id)
+            ->get();
+
 
         return view('admin.magang-details', [
             'title' => 'Detail Magang',
-            'data' => Internship::where('lecturer_id', $manage_magang->lecturer_id)->get(),
+            'data' => $data,
             'magang' => $manage_magang
         ]);
+
+        // return view('admin.magang-details', [
+        //     'title' => 'Detail Magang',
+        //     'data' => Internship::where('lecturer_id', $manage_magang->lecturer_id)->get(),
+        //     'magang' => $manage_magang
+        // ]);
     }
 
     /**

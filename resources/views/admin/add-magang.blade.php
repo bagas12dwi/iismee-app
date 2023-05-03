@@ -1,6 +1,15 @@
 @extends('layout.admin')
 
 @section('konten')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if (session()->has('success'))
         <div class="alert alert-success fw-bold alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -55,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $data)
+                                @foreach ($mhs as $data)
                                     <tr>
                                         <td>
                                             <div class="my-auto">
@@ -81,7 +90,7 @@
                                         <td>
                                             <div class="my-auto">
                                                 <h6 class="mb-0 text-sm">
-                                                    {{ $data->company_name }}
+                                                    {{ $data->company->company_name }}
                                                 </h6>
                                             </div>
                                         </td>
@@ -95,7 +104,7 @@
                                         <td>
                                             <div class="my-auto">
                                                 <h6 class="mb-0 text-sm">
-                                                    {{ $data->company_address }}
+                                                    {{ $data->company->company_address }}
                                                 </h6>
                                             </div>
                                         </td>
@@ -123,12 +132,13 @@
                                         <td>
                                             <div class="mb-3">
                                                 <label class="visually-hidden" for="inputName">Hidden input label</label>
-                                                <input type="hidden" class="form-control" name="student_id" id="student_id"
-                                                    placeholder="" value="{{ $data->id }}"
+                                                <input type="hidden" class="form-control" name="student_id[]"
+                                                    id="student_id" placeholder="" value="{{ $data->id }}"
                                                     style="display: none !important">
                                             </div>
                                             <button class="btn btn-primary font-weight-bold text-xs" data-toggle="tooltip"
-                                                data-original-title="Tambah" onclick="return confirm('Apakah anda yakin?')">
+                                                data-original-title="Tambah" onclick="return confirm('Apakah anda yakin?')"
+                                                value="{{ $data->id }}" name="tambahkan">
                                                 Tambahkan
                                             </button>
                                         </td>

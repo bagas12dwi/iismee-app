@@ -67,7 +67,7 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $data->student['company_name'] }}
+                                                {{ $data->company_name }}
                                             </h6>
                                         </div>
                                     </td>
@@ -81,7 +81,7 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $data->student['company_address'] }}
+                                                {{ $data->company_address }}
                                             </h6>
                                         </div>
                                     </td>
