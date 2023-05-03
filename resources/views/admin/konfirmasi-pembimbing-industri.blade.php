@@ -1,41 +1,6 @@
 @extends('layout.admin')
 
 @section('konten')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="row justify-content-between">
-        <div class="col">
-            <h4 class="mb-4">Manage {{ $title }}</h4>
-        </div>
-        <div class="col">
-            <a href="/manage-pembimbing-industri/create" class="btn btn-primary float-end">
-                Tambahkan {{ $title }}
-            </a>
-            @if ($jml > 0)
-                <a href="/konfirmasi-pembimbing-industri" class="btn btn-info float-end me-2 position-relative">
-                    Konfirmasi Pendaftaran
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ $jml }}
-                        <span class="visually-hidden">Jumlah</span>
-                    </span>
-                </a>
-            @endif
-            <form action="/setRegistrasi" method="post">
-                @csrf
-                <button class="btn {{ $registrasi->is_enable == true ? 'btn-danger' : 'btn-warning' }} float-end me-2"
-                    data-toggle="tooltip" onclick="return confirm('Apakah anda yakin?')">
-                    {{ $registrasi->is_enable == true ? 'Nonaktifkan' : 'Aktifkan' }} Registrasi
-                </button>
-            </form>
-        </div>
-    </div>
     @if (session()->has('success'))
         <div class="alert alert-success fw-bold alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -94,18 +59,13 @@
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="manage-pembimbing-industri/{{ $data->id }}/edit"
-                                            class="edit btn font-weight-bold text-xs" data-original-title="Edit user"
-                                            id="edit">
-                                            Edit
-                                        </a>
-                                        <form action="manage-pembimbing-industri/{{ $data->id }}" method="post"
-                                            class="d-inline">
-                                            @method('delete')
+                                        <form action="konfirmasi" method="post" class="d-inline">
+                                            @method('put')
                                             @csrf
-                                            <button class="btn btn-danger font-weight-bold text-xs" data-toggle="tooltip"
-                                                data-original-title="Hapus" onclick="return confirm('Apakah anda yakin?')">
-                                                Hapus
+                                            <button class="btn btn-info font-weight-bold text-xs" data-toggle="tooltip"
+                                                name="email" value="{{ $data->email }}" data-original-title="Hapus"
+                                                onclick="return confirm('Apakah anda yakin?')">
+                                                Konfirmasi
                                             </button>
                                         </form>
                                     </td>

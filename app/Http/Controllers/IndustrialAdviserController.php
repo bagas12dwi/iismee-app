@@ -17,11 +17,23 @@ class IndustrialAdviserController extends Controller
      */
     public function index()
     {
+        $pembimbing = User::where('level', '=', 'pembimbing industri')
+            ->where('is_active', '=', 'false')->get();
+
         $registrasi = WebSetting::where('name', '=', 'Registrasi Pembimbing Industri')->firstOrFail();
         return view('admin.pembimbing-industri', [
             'title' => 'Pembimbing Industri',
             'data' => IndustrialAdviser::with('company')->get(),
-            'registrasi' => $registrasi
+            'registrasi' => $registrasi,
+            'jml' => count($pembimbing)
+        ]);
+    }
+
+    public function konfirmasiIndex()
+    {
+        return view('admin.konfirmasi-pembimbing-industri', [
+            'title' => 'Pembimbing Industri',
+            'data' => IndustrialAdviser::with('company')->get()
         ]);
     }
 
@@ -111,6 +123,17 @@ class IndustrialAdviserController extends Controller
         IndustrialAdviser::where('id', $manage_pembimbing_industri->id)
             ->update($validatedData);
         return redirect()->intended('/manage-pembimbing-industri')->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function konfirmasi(Request $request)
+    {
+        $email = $request->input('email');
+        User::where('email', '=', $email)
+            ->update([
+                'is_active' => true
+            ]);
+
+        return redirect()->intended('/manage-pembimbing-industri')->with('success', 'Data Berhasil Dikonfirmasi');
     }
 
     /**

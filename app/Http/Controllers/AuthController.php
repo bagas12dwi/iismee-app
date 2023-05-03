@@ -64,19 +64,19 @@ class AuthController extends Controller
         //     }
         //     return back()->with('errorLogin', 'Login Gagal !');
         // } 
-        elseif ($level == 'pembimbing') {
+        elseif ($level == 'pembimbing' && $aktif == true) {
             if (Auth::attempt($inputan)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/dashboard-pembimbing');
             }
             return back()->with('errorLogin', 'Login Gagal !');
-        } elseif ($level == 'pembimbing industri') {
+        } elseif ($level == 'pembimbing industri' && $aktif == true) {
             if (Auth::attempt($inputan)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/dashboard-pembimbing-industri');
             }
             return back()->with('errorLogin', 'Login Gagal !');
-        } elseif ($level == 'mahasiswa') {
+        } elseif ($level == 'mahasiswa' && $aktif == true) {
             if (Auth::attempt($inputan)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/mahasiswa');
@@ -87,7 +87,7 @@ class AuthController extends Controller
         }
 
         // if (Auth::attempt($inputan)) {
-        //     $request->session()->regenerate();
+        //     $request->session()->regenerate();')
         //     return redirect()->intended('/');
         // }
 

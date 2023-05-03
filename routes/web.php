@@ -11,6 +11,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\IndustrialAdviserController;
+use App\Http\Controllers\IndustrialAdviserRegisterController;
 use App\Http\Controllers\IndustrialAssessmentController;
 use App\Http\Controllers\IndustrialDashboardController;
 use App\Http\Controllers\InternshipController;
@@ -52,6 +53,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('getDataPerusahaan', [AdminStudentController::class, 'getDataPerusahaan']);
     Route::resource('manage-pembimbing-industri', IndustrialAdviserController::class);
     Route::post('setRegistrasi', [WebSettingController::class, 'setRegistrasiPembimbingIndustri']);
+    Route::get('konfirmasi-pembimbing-industri', [IndustrialAdviserController::class, 'konfirmasiIndex']);
+    Route::put('konfirmasi', [IndustrialAdviserController::class, 'konfirmasi']);
 });
 
 //Pembimbing Route
@@ -87,5 +90,14 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
 Route::get('login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
+
+
+// Register Pembimbing Route
+Route::get('daftar-pembimbing-industri', [IndustrialAdviserRegisterController::class, 'index']);
+Route::post('daftar', [IndustrialAdviserRegisterController::class, 'store']);
+
+Route::get('/waiting', function () {
+    return view('errors.waiting');
+});
 
 Route::get('generate', [CustomHelper::class, 'generateRandomData']);
