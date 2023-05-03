@@ -1,6 +1,15 @@
 @extends('layout.admin')
 
 @section('konten')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row justify-content-between">
         <div class="col">
             <h4 class="mb-4">Manage {{ $title }}</h4>
@@ -9,6 +18,13 @@
             <a href="/manage-pembimbing-industri/create" class="btn btn-primary float-end">
                 Tambahkan {{ $title }}
             </a>
+            <form action="/setRegistrasi" method="post">
+                @csrf
+                <button class="btn {{ $registrasi->is_enable == true ? 'btn-danger' : 'btn-warning' }} float-end me-3"
+                    data-toggle="tooltip" onclick="return confirm('Apakah anda yakin?')">
+                    {{ $registrasi->is_enable == true ? 'Nonaktifkan' : 'Aktifkan' }} Registrasi
+                </button>
+            </form>
         </div>
     </div>
     @if (session()->has('success'))

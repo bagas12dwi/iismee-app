@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
+use App\Models\WebSetting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +28,11 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'level' => 'admin',
             'is_active' => true
+        ]);
+
+        WebSetting::factory()->create([
+            'name' => 'Registrasi Pembimbing Industri',
+            'is_enable' => true
         ]);
     }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
+use App\Http\Controllers\WebSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('manage-perusahaan', CompanyController::class);
     Route::get('getDataPerusahaan', [AdminStudentController::class, 'getDataPerusahaan']);
     Route::resource('manage-pembimbing-industri', IndustrialAdviserController::class);
+    Route::post('setRegistrasi', [WebSettingController::class, 'setRegistrasiPembimbingIndustri']);
 });
 
 //Pembimbing Route

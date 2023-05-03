@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateIndustrialAdviserRequest;
 use App\Models\Company;
 use App\Models\IndustrialAdviser;
 use App\Models\User;
+use App\Models\WebSetting;
 use Illuminate\Http\Request;
 
 class IndustrialAdviserController extends Controller
@@ -16,9 +17,11 @@ class IndustrialAdviserController extends Controller
      */
     public function index()
     {
+        $registrasi = WebSetting::where('name', '=', 'Registrasi Pembimbing Industri')->firstOrFail();
         return view('admin.pembimbing-industri', [
             'title' => 'Pembimbing Industri',
-            'data' => IndustrialAdviser::with('company')->get()
+            'data' => IndustrialAdviser::with('company')->get(),
+            'registrasi' => $registrasi
         ]);
     }
 
