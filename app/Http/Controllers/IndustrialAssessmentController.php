@@ -30,6 +30,8 @@ class IndustrialAssessmentController extends Controller
                     ->where('documents.type', '=', 'Surat Persetujuan Magang');
             })
             ->where('company_id', $pembimbing->company_id)
+            ->groupBy('students.id')
+            ->orderBy('is_assessment', 'asc')
             ->get();
 
         return view('pembimbing-industri.penilaian', [
@@ -98,6 +100,31 @@ class IndustrialAssessmentController extends Controller
         }
     }
 
+    public function showDetails($registration_number)
+    {
+        $mhs = Student::where('registration_number', '=', $registration_number)->firstOrFail();
+
+        $subjects = Subject::with(['assessment' => function ($query) use ($mhs) {
+            $query->where('student_id', $mhs->id);
+        }, 'assesmentAspect', 'lecturer'])
+            ->whereIn('subjects.id', function ($query) {
+                $query->select('subject_id')->from('assessments');
+            })
+            ->selectRaw('subjects.subject_name AS subject_name, lecturers.*, ROUND((SUM(industrial_assessments.score) / (subjects.max_score * COUNT(assesment_aspects.id))) * 100, 2) AS nilai')
+            ->leftJoin('industrial_assessments', 'subjects.id', '=', 'industrial_assessments.subject_id')
+            ->leftJoin('lecturers', 'lecturers.id', '=', 'subjects.lecturer_id')
+            ->leftJoin('assesment_aspects', 'industrial_assessments.assesment_aspect_id', '=', 'assesment_aspects.id')
+            ->groupBy('subjects.id')
+            ->where('industrial_assessments.student_id', '=', $mhs->id)
+            ->get();
+
+        return view('pembimbing-industri.penilaian-show', [
+            'title' => 'Penilaian',
+            'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
+            'matakuliah' => $subjects
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -118,7 +145,7 @@ class IndustrialAssessmentController extends Controller
 
         return view('pembimbing-industri.penilaian-edit', [
             'title' => 'Penilaian',
-            'data' => Student::where('registration_number', '=', $registration_number)->firstOrFail(),
+            'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
             'assessment' => $assesment,
             'mpks' => $subjects
         ]);

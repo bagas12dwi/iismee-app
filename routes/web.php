@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::get('penilaian', [SupervisorAssessmentController::class, 'index']);
     Route::get('penilaian/{registration_number}', [SupervisorAssessmentController::class, 'show']);
     Route::get('penilaian/{registration_number}/edit', [SupervisorAssessmentController::class, 'edit']);
+    Route::get('penilaian/{registration_number}/show', [SupervisorAssessmentController::class, 'showDetails']);
     Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
 });
@@ -73,6 +74,7 @@ Route::group(['middleware' => ['auth', "ceklevel:pembimbing industri"]], functio
     Route::get('dashboard-pembimbing-industri', [IndustrialDashboardController::class, 'index']);
     Route::get('penilaian-industri', [IndustrialAssessmentController::class, 'index']);
     Route::get('penilaian-industri/{registration_number}', [IndustrialAssessmentController::class, 'show']);
+    Route::get('penilaian-industri/{registration_number}/show', [IndustrialAssessmentController::class, 'showDetails']);
     Route::get('penilaian-industri/{registration_number}/edit', [IndustrialAssessmentController::class, 'edit']);
     Route::post('penilaian-industri', [IndustrialAssessmentController::class, 'store']);
     Route::put('penilaian-industri', [IndustrialAssessmentController::class, 'update']);

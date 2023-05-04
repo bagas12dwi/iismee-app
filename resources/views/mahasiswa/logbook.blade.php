@@ -97,8 +97,11 @@
                         role="button"><i class="fas fa-plus"></i> Tambah</a>
                     <a name="" id="" class="btn btn-info text-decoration-none" href="#"
                         role="button"><i class="fas fa-file-pdf"></i> Cetak Logbook</a>
-                    <a name="" id="" class="btn btn-primary text-decoration-none" target="_blank"
-                        href="{{ '/storage/' . $dokumen->document_path }}" role="button">Lihat Surat Persetujuan</a>
+                    @if ($suratMagang != null)
+                        <a name="" id="" class="btn btn-primary text-decoration-none" target="_blank"
+                            href="{{ '/storage/' . $suratMagang->document_path }}" role="button">Lihat Surat
+                            Persetujuan</a>
+                    @endif
                 </div>
                 <form action="/upload-dokumen" method="post" enctype="multipart/form-data">
                     @csrf

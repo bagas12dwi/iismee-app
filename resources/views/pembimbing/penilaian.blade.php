@@ -9,7 +9,7 @@
     <div class="row">
         @foreach ($mahasiswa as $item)
             <div class="col-md-3">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-4">
@@ -41,8 +41,8 @@
                                         style="margin-bottom: 0!important">Nilai</a>
                                 @endif
                             @endif
-                            <a href="#" class="btn btn-light btn-sm card-link fw-bold"
-                                style="margin-bottom: 0!important">Lihat</a>
+                            <a href="penilaian/{{ $item->student->registration_number }}/show"
+                                class="btn btn-light btn-sm card-link fw-bold" style="margin-bottom: 0!important">Lihat</a>
                             <div class="dropdown ms-auto">
                                 <a href="#" class="dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-bs-toggle="dropdown" aria-expanded="true">

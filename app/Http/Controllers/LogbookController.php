@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLogbookRequest;
-use App\Http\Requests\UpdateLogbookRequest;
 use App\Models\Document;
 use App\Models\Logbook;
 use App\Models\Student;
@@ -18,12 +16,13 @@ class LogbookController extends Controller
     public function index()
     {
         $mhs = Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail();
+        $sptjm = Document::where('student_id', '=', $mhs->id)->where('type', '=', 'Surat Persetujuan Magang')->first();
 
         return view('mahasiswa.logbook', [
             'title' => 'Logbook',
             'data' => Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail(),
             'logbook' => Logbook::where('student_id', '=', $mhs->id)->get(),
-            'dokumen' => Document::where('student_id', '=', $mhs->id)->where('type', '=', 'Surat Persetujuan Magang')->firstOrFail()
+            'suratMagang' => $sptjm
         ]);
     }
 

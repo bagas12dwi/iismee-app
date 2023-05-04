@@ -36,6 +36,7 @@ class SupervisorAssessmentController extends Controller
                     ->where('documents.type', '=', 'Surat Persetujuan Magang');
             })
             ->where('lecturer_id', $dosen->id)
+            ->orderBy('is_assessment', 'asc')
             ->get();
 
         $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
@@ -62,6 +63,32 @@ class SupervisorAssessmentController extends Controller
         } else {
             return view('errors.403');
         }
+    }
+
+    public function showDetails($registration_number)
+    {
+        $mhs = Student::where('registration_number', '=', $registration_number)->firstOrFail();
+
+        $subjects = Subject::with(['assessment' => function ($query) use ($mhs) {
+            $query->where('student_id', $mhs->id);
+        }, 'assesmentAspect', 'lecturer'])
+            ->whereIn('subjects.id', function ($query) {
+                $query->select('subject_id')->from('assessments');
+            })
+            ->selectRaw('subjects.subject_name AS subject_name, lecturers.*, ROUND((SUM(assessments.score) / (subjects.max_score * COUNT(assesment_aspects.id))) * 100, 2) AS nilai')
+            ->leftJoin('assessments', 'subjects.id', '=', 'assessments.subject_id')
+            ->leftJoin('lecturers', 'lecturers.id', '=', 'subjects.lecturer_id')
+            ->leftJoin('assesment_aspects', 'assessments.assesment_aspect_id', '=', 'assesment_aspects.id')
+            ->groupBy('subjects.id')
+            ->where('assessments.student_id', '=', $mhs->id)
+            ->get();
+
+
+        return view('pembimbing.penilaian-show', [
+            'title' => 'Penilaian',
+            'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
+            'matakuliah' => $subjects
+        ]);
     }
 
     public function edit($registration_number)
