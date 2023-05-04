@@ -9,6 +9,7 @@ use App\Models\IndustrialAssessment;
 use App\Models\Internship;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\WebSetting;
 use Illuminate\Http\Request;
 
 class IndustrialAssessmentController extends Controller
@@ -20,6 +21,7 @@ class IndustrialAssessmentController extends Controller
     {
         $email = auth()->user()->email;
         $pembimbing = IndustrialAdviser::where('email', '=', $email)->firstOrFail();
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
 
         $is_assessment = Student::selectRaw('IF(students.id IN (SELECT industrial_assessments.student_id FROM industrial_assessments), true, false) AS is_assessment, students.*, documents.document_path')
             ->leftJoin('industrial_assessments', 'students.id', '=', 'industrial_assessments.student_id')
@@ -32,7 +34,8 @@ class IndustrialAssessmentController extends Controller
 
         return view('pembimbing-industri.penilaian', [
             'title' => 'Penilaian',
-            'mahasiswa' => $is_assessment
+            'mahasiswa' => $is_assessment,
+            'penilaian' => $penilaian
         ]);
     }
 
@@ -79,15 +82,20 @@ class IndustrialAssessmentController extends Controller
     {
         $email = auth()->user()->email;
         $pembimbing = IndustrialAdviser::where('email', '=', $email)->firstOrFail();
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
 
-        return view('pembimbing-industri.penilaian-details', [
-            'title' => 'Penilaian',
-            'pembimbing' => $pembimbing,
-            'data' => Student::where('registration_number', '=', $registration_number)->firstOrFail(),
-            'mpk' => Subject::whereIn('id', function ($query) {
-                $query->select('subject_id')->from('assesment_aspects');
-            })->get()
-        ]);
+        if ($penilaian->is_enable == true) {
+            return view('pembimbing-industri.penilaian-details', [
+                'title' => 'Penilaian',
+                'pembimbing' => $pembimbing,
+                'data' => Student::where('registration_number', '=', $registration_number)->firstOrFail(),
+                'mpk' => Subject::whereIn('id', function ($query) {
+                    $query->select('subject_id')->from('assesment_aspects');
+                })->get()
+            ]);
+        } else {
+            return view('errors.403');
+        }
     }
 
     /**

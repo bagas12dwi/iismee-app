@@ -21,7 +21,7 @@
                                 </svg>
                             </div>
                             <div class="col-md-8">
-                                <h5 class="card-title">{{ $item->student->name }}</h5>
+                                <h5 class="card-title ellipsis">{{ $item->student->name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">
                                     {{ $item->student->registration_number }} </h6>
                             </div>
@@ -29,15 +29,17 @@
                         <p style="margin-bottom: 0 !important">{{ $item->company_name }}</p>
                         <p class="ellipsis">{{ $item->company_address }}</p>
                         <div class="d-flex align-items-center">
-                            @if ($item->is_assessment == true)
-                                <a href="penilaian/{{ $item->student->registration_number }}/edit"
-                                    class="btn btn-warning btn-sm card-link fw-bold text-dark"
-                                    style="margin-bottom: 0!important">Ubah
-                                    Nilai</a>
-                            @else
-                                <a href="penilaian/{{ $item->student->registration_number }}"
-                                    class="btn btn-primary btn-sm card-link fw-bold"
-                                    style="margin-bottom: 0!important">Nilai</a>
+                            @if ($penilaian->is_enable == true)
+                                @if ($item->is_assessment == true)
+                                    <a href="penilaian/{{ $item->student->registration_number }}/edit"
+                                        class="btn btn-warning btn-sm card-link fw-bold text-dark"
+                                        style="margin-bottom: 0!important">Ubah
+                                        Nilai</a>
+                                @else
+                                    <a href="penilaian/{{ $item->student->registration_number }}"
+                                        class="btn btn-primary btn-sm card-link fw-bold"
+                                        style="margin-bottom: 0!important">Nilai</a>
+                                @endif
                             @endif
                             <a href="#" class="btn btn-light btn-sm card-link fw-bold"
                                 style="margin-bottom: 0!important">Lihat</a>

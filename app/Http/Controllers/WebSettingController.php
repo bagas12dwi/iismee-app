@@ -35,6 +35,25 @@ class WebSettingController extends Controller
         return redirect()->intended('/manage-pembimbing-industri');
     }
 
+    public function setPenilaian()
+    {
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+
+        if ($penilaian->is_enable == true) {
+            WebSetting::where('name', '=', 'Periode Penilaian')
+                ->update([
+                    'is_enable' => false
+                ]);
+        } else {
+            WebSetting::where('name', '=', 'Periode Penilaian')
+                ->update([
+                    'is_enable' => true
+                ]);
+        }
+
+        return redirect()->intended('/manage-matakuliah');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

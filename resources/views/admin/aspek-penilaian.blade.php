@@ -6,11 +6,13 @@
         <div class="col">
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
-        <div class="col">
-            <a href="/aspek-penilaian/create" class="btn btn-primary float-end">
-                Tambahkan {{ $title }}
-            </a>
-        </div>
+        @if ($penilaian->is_enable == true)
+            <div class="col">
+                <a href="/aspek-penilaian/create" class="btn btn-primary float-end">
+                    Tambahkan {{ $title }}
+                </a>
+            </div>
+        @endif
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success fw-bold alert-dismissible fade show" role="alert">
@@ -104,16 +106,20 @@
                                                                     data-original-title="Edit user" id="edit">
                                                                     Edit
                                                                 </a>
-                                                                <form action="/aspek-penilaian/{{ $aspek->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="btn btn-danger font-weight-bold text-xs"
-                                                                        data-toggle="tooltip" data-original-title="Hapus"
-                                                                        onclick="return confirm('Apakah anda yakin?')">
-                                                                        Hapus
-                                                                    </button>
-                                                                </form>
+                                                                @if ($penilaian->is_enable == true)
+                                                                    <form action="/aspek-penilaian/{{ $aspek->id }}"
+                                                                        method="post" class="d-inline">
+                                                                        @method('delete')
+                                                                        @csrf
+                                                                        <button
+                                                                            class="btn btn-danger font-weight-bold text-xs"
+                                                                            data-toggle="tooltip"
+                                                                            data-original-title="Hapus"
+                                                                            onclick="return confirm('Apakah anda yakin?')">
+                                                                            Hapus
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

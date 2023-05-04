@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('getDataPerusahaan', [AdminStudentController::class, 'getDataPerusahaan']);
     Route::resource('manage-pembimbing-industri', IndustrialAdviserController::class);
     Route::post('setRegistrasi', [WebSettingController::class, 'setRegistrasiPembimbingIndustri']);
+    Route::post('setPenilaian', [WebSettingController::class, 'setPenilaian']);
     Route::get('konfirmasi-pembimbing-industri', [IndustrialAdviserController::class, 'konfirmasiIndex']);
     Route::put('konfirmasi', [IndustrialAdviserController::class, 'konfirmasi']);
 });

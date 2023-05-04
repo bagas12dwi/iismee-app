@@ -10,6 +10,7 @@ use App\Models\Lecturer;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\WebSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,22 +38,30 @@ class SupervisorAssessmentController extends Controller
             ->where('lecturer_id', $dosen->id)
             ->get();
 
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
 
         return view('pembimbing.penilaian', [
             'title' => 'Penilaian',
-            'mahasiswa' => $is_assessment
+            'mahasiswa' => $is_assessment,
+            'penilaian' => $penilaian
         ]);
     }
 
     public function show(Request $request, $registration_number)
     {
-        return view('pembimbing.penilaian-details', [
-            'title' => 'Penilaian',
-            'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
-            'mpk' => Subject::whereIn('id', function ($query) {
-                $query->select('subject_id')->from('assesment_aspects');
-            })->get()
-        ]);
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+
+        if ($penilaian->is_enable == true) {
+            return view('pembimbing.penilaian-details', [
+                'title' => 'Penilaian',
+                'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
+                'mpk' => Subject::whereIn('id', function ($query) {
+                    $query->select('subject_id')->from('assesment_aspects');
+                })->get()
+            ]);
+        } else {
+            return view('errors.403');
+        }
     }
 
     public function edit($registration_number)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecturer;
 use App\Models\Subject;
+use App\Models\WebSetting;
 use Illuminate\Http\Request;
 
 class AdminSubjectController extends Controller
@@ -13,9 +14,12 @@ class AdminSubjectController extends Controller
      */
     public function index()
     {
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+
         return view('admin.matakuliah', [
             'title' => 'Mata Kuliah',
-            'data' => Subject::all()
+            'data' => Subject::all(),
+            'penilaian' => $penilaian
         ]);
     }
 
@@ -24,10 +28,15 @@ class AdminSubjectController extends Controller
      */
     public function create()
     {
-        return view('admin.add-matakuliah', [
-            'title' => 'Tambahkan Mata Kuliah',
-            'dosen' => Lecturer::all()
-        ]);
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+        if ($penilaian->is_enable == true) {
+            return view('admin.add-matakuliah', [
+                'title' => 'Tambahkan Mata Kuliah',
+                'dosen' => Lecturer::all()
+            ]);
+        } else {
+            return view('errors.403');
+        }
     }
 
     /**

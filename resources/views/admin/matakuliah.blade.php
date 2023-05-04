@@ -6,9 +6,18 @@
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
         <div class="col">
-            <a href="/manage-matakuliah/create" class="btn btn-primary float-end">
-                Tambahkan {{ $title }}
-            </a>
+            @if ($penilaian->is_enable == true)
+                <a href="/manage-matakuliah/create" class="btn btn-primary float-end">
+                    Tambahkan {{ $title }}
+                </a>
+            @endif
+            <form action="/setPenilaian" method="post">
+                @csrf
+                <button class="btn {{ $penilaian->is_enable == true ? 'btn-danger' : 'btn-warning' }} float-end me-2"
+                    data-toggle="tooltip" onclick="return confirm('Apakah anda yakin?')">
+                    {{ $penilaian->is_enable == true ? 'Nonaktifkan' : 'Aktifkan' }} Periode Penilaian
+                </button>
+            </form>
         </div>
     </div>
     @if (session()->has('success'))
@@ -75,15 +84,18 @@
                                             id="edit">
                                             Edit
                                         </a>
-                                        <form action="manage-matakuliah/{{ $data->subject_name }}" method="post"
-                                            class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger font-weight-bold text-xs" data-toggle="tooltip"
-                                                data-original-title="Hapus" onclick="return confirm('Apakah anda yakin?')">
-                                                Hapus
-                                            </button>
-                                        </form>
+                                        @if ($penilaian->is_enable == true)
+                                            <form action="manage-matakuliah/{{ $data->subject_name }}" method="post"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Hapus"
+                                                    onclick="return confirm('Apakah anda yakin?')">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

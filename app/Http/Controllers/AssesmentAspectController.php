@@ -8,6 +8,7 @@ use App\Models\AssesmentAspect;
 use App\Models\Lecturer;
 use App\Models\Subject;
 use App\Models\Supervisor;
+use App\Models\WebSetting;
 use Illuminate\Http\Request;
 use Mockery\Matcher\Subset;
 
@@ -18,9 +19,12 @@ class AssesmentAspectController extends Controller
      */
     public function index()
     {
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+
         return view('admin.aspek-penilaian', [
             'title' => 'Aspek Penilaian',
-            'matakuliah' => Subject::all()
+            'matakuliah' => Subject::all(),
+            'penilaian' => $penilaian
         ]);
     }
 
@@ -29,10 +33,16 @@ class AssesmentAspectController extends Controller
      */
     public function create()
     {
-        return view('admin.add-aspek-penilaian', [
-            'title' => 'Tambahkan Aspek Penilaian',
-            'matakuliah' => Subject::all()
-        ]);
+        $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
+
+        if ($penilaian->is_enable == true) {
+            return view('admin.add-aspek-penilaian', [
+                'title' => 'Tambahkan Aspek Penilaian',
+                'matakuliah' => Subject::all()
+            ]);
+        } else {
+            return view('errors.403');
+        }
     }
 
     /**

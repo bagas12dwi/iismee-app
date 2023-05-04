@@ -42,6 +42,7 @@
 <body>
     <div class="container">
         <div class="content">
+            <img src="{{ URL::asset('/img/403.svg') }}" height="300" alt="">
             <div class="title">403 Forbidden</div>
             <p>Maaf, Anda tidak diizinkan untuk mengakses halaman ini.</p>
         </div>
