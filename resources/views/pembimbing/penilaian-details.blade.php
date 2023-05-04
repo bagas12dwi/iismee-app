@@ -16,17 +16,82 @@
                 <div class="card-body">
                     <p>Data Mahasiswa :</p>
                     <div class="row">
-                        <div class="col-md-6">
-                            <h5>NIM : {{ $data->registration_number }} </h5>
-                            <h6>Nama : {{ $data->name }}</h6>
-                            <h6>Tempat Magang : {{ $data->company_name }}</h6>
-                            <h6>Alamat Tempat Magang : {{ $data->company_address }}</h6>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">NIM</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4"
+                                        value="{{ $data->registration_number }}" readonly>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <h6>Tanggal Mulai : {{ $data->date_start }} </h6>
-                            <h6>Tanggal Selesai : {{ $data->date_end }}</h6>
-                            <h6>Divisi : {{ $data->division }}</h6>
-                            <h6>Tipe Magang : {{ $data->internship_type }}</h6>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Nama</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4" value="{{ $data->name }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Kelas</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4" value="{{ $data->class }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Nama Perusahaan</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4"
+                                        value="{{ $data->company->company_name }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Alamat</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4"
+                                        value="{{ $data->company->company_address }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Divisi</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4" value="{{ $data->division }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Tipe Magang</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4" value="{{ $data->internship_type }}"
+                                        readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">Tgl. Mulai</span>
+                                    <input type="text" class="form-control ps-3" id="basic-url"
+                                        aria-describedby="basic-addon3 basic-addon4"
+                                        value="{{ $data->date_start }} s/d {{ $data->date_end }}" readonly>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,8 +115,8 @@
                                 </button>
                             </h2>
                             <label class="visually-hidden" for="inputName">Hidden input label</label>
-                            <input type="hidden" class="form-control" name="lecturer_id" id="lecturer_id" placeholder=""
-                                value="{{ $mpk->lecturer_id }}" style="display: none !important">
+                            <input type="hidden" class="form-control" name="lecturer_id" id="lecturer_id"
+                                placeholder="" value="{{ $mpk->lecturer_id }}" style="display: none !important">
                             <label class="visually-hidden" for="inputName">Hidden input label</label>
                             <input type="hidden" class="form-control" name="student_id" id="student_id" placeholder=""
                                 value="{{ $data->id }}" style="display: none !important">
@@ -64,12 +129,14 @@
                                             <div class="col-md-6">
                                                 <ul>
                                                     <li>
-                                                        <p> {{ $aspek->name }} </p>
+                                                        <h6> {{ $aspek->name }} </h6>
+                                                        <p class="text-muted" style="font-size: 10pt!important">
+                                                            {{ $aspek->description }} </p>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <input type="hidden" class="form-control" name="subject_id[]" id="subject_id"
-                                                placeholder="" value="{{ $aspek->subject_id }}"
+                                            <input type="hidden" class="form-control" name="subject_id[]"
+                                                id="subject_id" placeholder="" value="{{ $aspek->subject_id }}"
                                                 style="display: none !important">
                                             <input type="hidden" class="form-control" name="assesment_aspect_id[]"
                                                 id="assesment_aspect_id" placeholder="" value="{{ $aspek->id }}"

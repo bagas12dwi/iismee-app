@@ -27,8 +27,9 @@ class SupervisorAssessmentController extends Controller
         //     ->where('documents.type', '=', 'Surat Persetujuan Magang')
         //     ->get();
 
-        $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path')
+        $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path, companies.*')
             ->leftJoin('students', 'internships.student_id', '=', 'students.id')
+            ->join('companies', 'students.company_id', '=', 'companies.id')
             ->leftJoin('documents', function ($join) {
                 $join->on('students.id', '=', 'documents.student_id')
                     ->where('documents.type', '=', 'Surat Persetujuan Magang');
@@ -47,7 +48,7 @@ class SupervisorAssessmentController extends Controller
     {
         return view('pembimbing.penilaian-details', [
             'title' => 'Penilaian',
-            'data' => Student::where('registration_number', '=', $registration_number)->firstOrFail(),
+            'data' => Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail(),
             'mpk' => Subject::whereIn('id', function ($query) {
                 $query->select('subject_id')->from('assesment_aspects');
             })->get()
