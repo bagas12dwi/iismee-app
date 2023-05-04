@@ -51,4 +51,9 @@ class Student extends Model
     {
         return $this->belongsTo('App\Models\Company');
     }
+
+    public function attendance()
+    {
+        return $this->hasMany('App\Models\Attendance');
+    }
 }

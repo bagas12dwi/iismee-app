@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CustomHelper;
 use App\Models\Document;
 use App\Models\Logbook;
 use App\Models\Student;
@@ -15,15 +16,28 @@ class LogbookController extends Controller
      */
     public function index()
     {
+        $customHelper = new CustomHelper();
+
         $mhs = Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail();
         $sptjm = Document::where('student_id', '=', $mhs->id)->where('type', '=', 'Surat Persetujuan Magang')->first();
+        $tanggalNow = $customHelper->defaultDateTime('tanggalDb');
 
-        return view('mahasiswa.logbook', [
-            'title' => 'Logbook',
-            'data' => Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail(),
-            'logbook' => Logbook::where('student_id', '=', $mhs->id)->get(),
-            'suratMagang' => $sptjm
-        ]);
+        $cekAbsensiDatang = Student::selectRaw('IF(students.id IN (SELECT attendances.student_id FROM attendances WHERE DATE(attendances.absent_entry) = "' . $tanggalNow . '"), true, false) AS is_absen')
+            ->join('attendances', 'attendances.student_id', '=', 'students.id')
+            ->where('students.id', '=', $mhs->id)
+            ->first();
+
+        if ($cekAbsensiDatang != null) {
+            return view('mahasiswa.logbook', [
+                'title' => 'Logbook',
+                'data' => Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail(),
+                'logbook' => Logbook::where('student_id', '=', $mhs->id)->get(),
+                'suratMagang' => $sptjm,
+                'cekAbsensiDatang' => $cekAbsensiDatang->is_absen,
+            ]);
+        } else {
+            return redirect()->intended('/absensi');
+        }
     }
 
     /**

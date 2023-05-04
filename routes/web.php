@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminSupervisorController;
 use App\Http\Controllers\AssesmentAspectController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardAdminController;
@@ -87,6 +88,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
     Route::resource('logbook', LogbookController::class);
     Route::post('upload-dokumen', [DocumentController::class, 'store']);
     Route::resource('laporan', ReportController::class);
+    Route::get('absensi', [AttendanceController::class, 'index']);
+    Route::post('absensi', [AttendanceController::class, 'store']);
+    Route::put('absensi', [AttendanceController::class, 'update']);
 });
 
 //auth Controller

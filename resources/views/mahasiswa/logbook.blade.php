@@ -47,7 +47,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Perusahaan</span>
                                 <input type="text" class="form-control" id="basic-url"
-                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company_name }}" readonly>
+                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company->company_name }}"
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -101,6 +102,10 @@
                         <a name="" id="" class="btn btn-primary text-decoration-none" target="_blank"
                             href="{{ '/storage/' . $suratMagang->document_path }}" role="button">Lihat Surat
                             Persetujuan</a>
+                    @endif
+                    @if ($cekAbsensiDatang == true)
+                        <a name="" id="" class="btn btn-warning text-decoration-none" href="/absensi"
+                            role="button"><i class="fas fa-clipboard-check"></i> Absensi</a>
                     @endif
                 </div>
                 <form action="/upload-dokumen" method="post" enctype="multipart/form-data">
