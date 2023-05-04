@@ -66,4 +66,32 @@ class CustomHelper
 
         return $date;
     }
+
+    public function konversiNilai($nilai)
+    {
+        $hasil = $nilai / 100 * 4;
+
+        if ($hasil > 3.75) {
+            $predikat = 'A';
+        } elseif ($hasil > 3.50 && $hasil <= 3.75) {
+            $predikat = 'A-';
+        } elseif ($hasil > 3.00 && $hasil <= 3.50) {
+            $predikat = 'B+';
+        } elseif ($hasil > 2.75 && $hasil <= 3.00) {
+            $predikat = 'B';
+        } elseif ($hasil > 2.50 && $hasil <= 2.75) {
+            $predikat = 'B-';
+        } elseif ($hasil > 2.00 && $hasil <= 2.50) {
+            $predikat = 'C+';
+        } elseif ($hasil > 1.00 && $hasil <= 2.00) {
+            $predikat = 'C';
+        } elseif ($hasil > 0.00 && $hasil <= 1.00) {
+            $predikat = 'D';
+        } else {
+            $predikat = '-';
+        }
+
+
+        return $predikat;
+    }
 }

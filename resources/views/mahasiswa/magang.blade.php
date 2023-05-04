@@ -1,3 +1,9 @@
+@php
+    use App\Helpers\CustomHelper;
+    $customHelper = new CustomHelper();
+    
+@endphp
+
 @extends('layout.user')
 
 @section('konten')
@@ -41,7 +47,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Perusahaan</span>
                                 <input type="text" class="form-control" id="basic-url"
-                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company_name }}" readonly>
+                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company->company_name }}"
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -124,11 +131,17 @@
                                     Kuliah</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DPMK
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SKS
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                    SKS
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nilai angka
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                    nilai angka
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nilai huruf
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                    Nilai huruf
                                 </th>
                             </tr>
                         </thead>
@@ -152,31 +165,28 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $data->lecturer['name'] }}
+                                                {{ $data->name }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
-                                                {{-- {{ $data->lecturer['name'] }} --}}
-                                                3
+                                            <h6 class="mb-0 text-sm text-center">
+                                                {{ $data->sks }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
-                                                {{-- {{ $data->lecturer['name'] }} --}}
-                                                -
+                                            <h6 class="mb-0 text-sm text-center">
+                                                {{ $data->nilai }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
-                                                {{-- {{ $data->lecturer['name'] }} --}}
-                                                -
+                                            <h6 class="mb-0 text-sm text-center">
+                                                {{ $customHelper->konversiNilai($data->nilai) }}
                                             </h6>
                                         </div>
                                     </td>

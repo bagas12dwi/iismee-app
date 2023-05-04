@@ -50,7 +50,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Perusahaan</span>
                                 <input type="text" class="form-control" id="basic-url"
-                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company_name }}" readonly>
+                                    aria-describedby="basic-addon3 basic-addon4" value="{{ $data->company->company_name }}"
+                                    readonly>
                             </div>
                         </div>
                     </div>
