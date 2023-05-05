@@ -25,6 +25,7 @@ use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
 use App\Http\Controllers\WebSettingController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +95,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
     Route::put('absensi', [AttendanceController::class, 'update']);
     Route::get('profile-user', [ProfileController::class, 'indexUser']);
     Route::put('gantiFoto', [ProfileController::class, 'gantiFoto']);
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('gantiPassword', [ProfileController::class, 'indexGantiPassword']);
+    Route::put('gantiPassword', [ProfileController::class, 'gantiPassword']);
 });
 
 //auth Controller

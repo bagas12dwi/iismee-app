@@ -39,6 +39,11 @@
                                  <i class="fas fa-user fa-sm me-2"></i>Profil
                              </a>
                          </li>
+                         <li>
+                             <a class="dropdown-item" href="/gantiPassword">
+                                 <i class="fas fa-key fa-sm me-2"></i>Ubah Password
+                             </a>
+                         </li>
                          <hr>
                          <li>
                              <form action="/logout" method="POST">

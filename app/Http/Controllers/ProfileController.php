@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,5 +36,33 @@ class ProfileController extends Controller
 
         Student::where('id', '=', $mhs->id)->update($validatedData);
         return redirect()->intended('/profile-user')->with('success', 'Data Berhasil Diubah !');
+    }
+
+    public function indexGantiPassword()
+    {
+        $level = auth()->user()->level;
+
+        if ($level == 'mahasiswa') {
+            return view('mahasiswa.ganti-password', [
+                'title' => 'Ganti Password'
+            ]);
+        } else {
+            return view('akun.ganti-password', [
+                'title' => 'Ganti Password'
+            ]);
+        }
+    }
+
+    public function gantiPassword(Request $request)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required'
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        User::where('id', '=', auth()->user()->id)->update($validatedData);
+
+        return redirect()->intended('/gantiPassword')->with('success', 'Data Berhasil Diubah !');
     }
 }

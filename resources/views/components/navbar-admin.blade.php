@@ -19,6 +19,12 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
+                            <a class="dropdown-item" href="/gantiPassword">
+                                <i class="fas fa-key fa-sm me-2"></i>Ubah Password
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
                             <form action="/logout" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">
