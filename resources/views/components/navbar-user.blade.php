@@ -31,10 +31,15 @@
                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                          aria-expanded="false">
                          <i class="fa fa-user"></i>
-                         {{-- <span class="d-sm-inline d-none">Admin</span> --}}
-                         <span class="d-sm-inline d-none">{{ auth()->user()->name }}</span>
+                         <span class="d-sm-inline d-none"> {{ auth()->user()->name }}</span>
                      </a>
                      <ul class="dropdown-menu dropdown-menu-end">
+                         <li>
+                             <a class="dropdown-item" href="/profile-user">
+                                 <i class="fas fa-user fa-sm me-2"></i>Profil
+                             </a>
+                         </li>
+                         <hr>
                          <li>
                              <form action="/logout" method="POST">
                                  @csrf

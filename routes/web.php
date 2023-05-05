@@ -17,6 +17,7 @@ use App\Http\Controllers\IndustrialAssessmentController;
 use App\Http\Controllers\IndustrialDashboardController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
@@ -91,6 +92,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
     Route::get('absensi', [AttendanceController::class, 'index']);
     Route::post('absensi', [AttendanceController::class, 'store']);
     Route::put('absensi', [AttendanceController::class, 'update']);
+    Route::get('profile-user', [ProfileController::class, 'indexUser']);
+    Route::put('gantiFoto', [ProfileController::class, 'gantiFoto']);
 });
 
 //auth Controller

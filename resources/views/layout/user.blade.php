@@ -57,6 +57,7 @@
     <script src="{{ URL::asset('/js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
     <script src="{{ URL::asset('/js/isotope.pkgd.min.js') }}"></script> <!-- Isotope for filter -->
     <script src="{{ URL::asset('/js/scripts.js') }}"></script> <!-- Custom scripts -->
+    @stack('script')
 </body>
 
 </html>
