@@ -27,11 +27,6 @@
                     value="{{ old('activity_name') }}" placeholder="Nama Kegiatan">
             </div>
             <div class="mb-3">
-                <label for="activity_date" class="form-label">Tanggal Kegiatan</label>
-                <input type="date" class="form-control" name="activity_date" id="activity_date"
-                    value="{{ old('activity_date') }}" placeholder="Tanggal Kegiatan">
-            </div>
-            <div class="mb-3">
                 <label for="img" class="form-label">Foto Kegiatan</label>
                 <input type="file" class="form-control" name="img" id="img" placeholder="Foto Kegiatan">
             </div>

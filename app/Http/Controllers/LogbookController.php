@@ -8,6 +8,9 @@ use App\Models\Logbook;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 
 class LogbookController extends Controller
 {
@@ -27,7 +30,9 @@ class LogbookController extends Controller
             ->where('students.id', '=', $mhs->id)
             ->first();
 
-        if ($cekAbsensiDatang != null) {
+        // dd($cekAbsensiDatang->is_absen);
+
+        if ($cekAbsensiDatang->is_absen ?? null) {
             return view('mahasiswa.logbook', [
                 'title' => 'Logbook',
                 'data' => Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail(),
@@ -38,6 +43,19 @@ class LogbookController extends Controller
         } else {
             return redirect()->intended('/absensi');
         }
+    }
+
+    public function printLogbook()
+    {
+        $mhs = Student::with('internship.lecturer')->where('email', '=', auth()->user()->email)->firstOrFail();
+
+        $data = Logbook::where('student_id', '=', $mhs->id)->get();
+
+        $pdf = Pdf::loadView('mahasiswa.print-logbook', [
+            'data' => $data
+        ]);
+
+        return $pdf->stream('logbook.pdf');
     }
 
     /**
@@ -56,15 +74,16 @@ class LogbookController extends Controller
     public function store(Request $request)
     {
         $mhs = Student::where('email', '=', auth()->user()->email)->firstOrFail();
+        $helper = new CustomHelper();
 
         $validatedData = $request->validate([
             'activity_name' => 'required',
-            'activity_date' => 'required',
             'img' => 'required|image',
             'description' => 'required'
         ]);
 
         $validatedData['student_id'] = $mhs->id;
+        $validatedData['activity_date'] = $helper->defaultDateTime('tanggalDb');
         $validatedData['img'] = $request->file('img')->store('logbook');
 
         Logbook::create($validatedData);
@@ -99,7 +118,6 @@ class LogbookController extends Controller
 
         $validatedData = $request->validate([
             'activity_name' => 'required',
-            'activity_date' => 'required',
             'img' => 'image',
             'description' => 'required'
         ]);

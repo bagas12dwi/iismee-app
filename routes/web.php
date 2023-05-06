@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
     Route::put('absensi', [AttendanceController::class, 'update']);
     Route::get('profile-user', [ProfileController::class, 'indexUser']);
     Route::put('gantiFoto', [ProfileController::class, 'gantiFoto']);
+    Route::get('print-logbook', [LogbookController::class, 'printLogbook']);
 });
 
 Route::group(['middleware' => ['auth']], function () {

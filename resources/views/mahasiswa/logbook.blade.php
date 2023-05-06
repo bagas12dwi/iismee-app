@@ -96,8 +96,8 @@
                 <div class="my-3">
                     <a name="" id="" class="btn btn-success text-decoration-none" href="/logbook/create"
                         role="button"><i class="fas fa-plus"></i> Tambah</a>
-                    <a name="" id="" class="btn btn-info text-decoration-none" href="#"
-                        role="button"><i class="fas fa-file-pdf"></i> Cetak Logbook</a>
+                    <a name="" id="" class="btn btn-info text-decoration-none" href="/print-logbook"
+                        target="_blank" role="button"><i class="fas fa-file-pdf"></i> Cetak Logbook</a>
                     @if ($suratMagang != null)
                         <a name="" id="" class="btn btn-primary text-decoration-none" target="_blank"
                             href="{{ '/storage/' . $suratMagang->document_path }}" role="button">Lihat Surat
