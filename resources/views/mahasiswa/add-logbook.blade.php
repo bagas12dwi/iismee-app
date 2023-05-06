@@ -2,8 +2,8 @@
 
 @section('konten')
     <div class="container mb-4" style="margin-top: 100px">
-        <a name="" id="" class="btn btn-danger text-decoration-none" href="/logbook" role="button"><i
-                class="fas fa-arrow-left"></i>
+        <a name="" id="" class="btn btn-danger text-decoration-none" href="{{ url('logbook') }}"
+            role="button"><i class="fas fa-arrow-left"></i>
             Kembali</a>
         <div class="card bg-success text-light my-4">
             <div class="card-body fw-bold">
@@ -19,7 +19,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/logbook" method="post" enctype="multipart/form-data">
+        <form action="{{ url('logbook') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="activity_name" class="form-label">Nama Kegiatan</label>

@@ -73,7 +73,7 @@
                                 @endif
 
                                 <div class="card-body">
-                                    <form role="form" action="/login" method="POST">
+                                    <form role="form" action="{{ url('login') }}" method="POST">
                                         @csrf
                                         <label>Email</label>
                                         <div class="mb-3">

@@ -103,7 +103,7 @@
             <h5 class="mb-3">Penilaian : </h5>
 
             <div class="accordion" id="accordionExample">
-                <form action="/penilaian" method="post">
+                <form action="{{ url('penilaian') }}" method="post">
                     @csrf
                     @foreach ($mpk as $mpk)
                         <div class="accordion-item">

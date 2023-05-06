@@ -7,11 +7,11 @@
         </div>
         <div class="col">
             @if ($penilaian->is_enable == true)
-                <a href="/manage-matakuliah/create" class="btn btn-primary float-end">
+                <a href="{{ url('manage-matakuliah/create') }}" class="btn btn-primary float-end">
                     Tambahkan {{ $title }}
                 </a>
             @endif
-            <form action="/setPenilaian" method="post">
+            <form action="{{ url('setPenilaian') }}" method="post">
                 @csrf
                 <button class="btn {{ $penilaian->is_enable == true ? 'btn-danger' : 'btn-warning' }} float-end me-2"
                     data-toggle="tooltip" onclick="return confirm('Apakah anda yakin?')">

@@ -19,7 +19,8 @@
             <small class="form-text text-muted" id="text-help">Tekan untuk mengganti foto profil.</small>
         </div>
         <div class="my-4">
-            <form action="/gantiFoto" id="form" style="display: none" method="post" enctype="multipart/form-data">
+            <form action="{{ url('gantiFoto') }}" id="form" style="display: none" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="mb-3">

@@ -19,13 +19,13 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="/gantiPassword">
+                            <a class="dropdown-item" href="{{ url('gantiPassword') }}">
                                 <i class="fas fa-key fa-sm me-2"></i>Ubah Password
                             </a>
                         </li>
                         <hr>
                         <li>
-                            <form action="/logout" method="POST">
+                            <form action="{{ url('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">
                                     <i class="fas fa-sign-out-alt fa-sm me-2"></i>Logout

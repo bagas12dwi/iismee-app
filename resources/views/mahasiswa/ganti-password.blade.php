@@ -3,7 +3,7 @@
 @section('konten')
     <div class="container mb-4" style="margin-top: 100px">
         <div class="my-4">
-            <form action="/gantiPassword" id="form" method="post" enctype="multipart/form-data">
+            <form action="{{ url('gantiPassword') }}" id="form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="mb-3">

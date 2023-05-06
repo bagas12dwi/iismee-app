@@ -112,7 +112,7 @@
                     <h5 class="mb-3">Absensi {{ $now }}</h5>
                     @if ($is_absen_datang == true)
                         <h6 class="mb-3">Silahkan Mengisi Absensi Pulang !</h6>
-                        <form action="/absensi" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('absensi') }}" method="post" enctype="multipart/form-data">
                             @method('put')
                             @csrf
                             <div class="input-group mb-3">
@@ -125,7 +125,7 @@
                         </form>
                     @else
                         <h6 class="mb-3">Sebelum Mengisi Logbook Silahkan Absen Terlebih Dahulu !</h6>
-                        <form action="/absensi" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('absensi') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="input-group mb-3">
                                 <input class="form-control d-inline" type="hidden" value="{{ $data->id }}"

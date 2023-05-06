@@ -6,7 +6,7 @@
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
         <div class="col">
-            <a href="/manage-magang/create" class="btn btn-primary float-end">
+            <a href="{{ url('manage-magang/create') }}" class="btn btn-primary float-end">
                 Tambahkan {{ $title }}
             </a>
         </div>

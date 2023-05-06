@@ -83,7 +83,7 @@
             <h5 class="mb-3">Edit Penilaian : </h5>
 
             <div class="accordion" id="accordionExample">
-                <form action="/penilaian-industri" method="post">
+                <form action="{{ url('penilaian-industri') }}" method="post">
                     @method('PUT')
                     @csrf
                     @foreach ($mpks as $mpk)

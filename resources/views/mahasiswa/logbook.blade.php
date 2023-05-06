@@ -94,21 +94,23 @@
                 </div>
                 <hr>
                 <div class="my-3">
-                    <a name="" id="" class="btn btn-success text-decoration-none" href="/logbook/create"
-                        role="button"><i class="fas fa-plus"></i> Tambah</a>
-                    <a name="" id="" class="btn btn-info text-decoration-none" href="/print-logbook"
-                        target="_blank" role="button"><i class="fas fa-file-pdf"></i> Cetak Logbook</a>
+                    <a name="" id="" class="btn btn-success text-decoration-none"
+                        href="{{ url('logbook/create') }}" role="button"><i class="fas fa-plus"></i> Tambah</a>
+                    <a name="" id="" class="btn btn-info text-decoration-none"
+                        href="{{ url('print-logbook') }}" target="_blank" role="button"><i
+                            class="fas fa-file-pdf"></i> Cetak Logbook</a>
                     @if ($suratMagang != null)
                         <a name="" id="" class="btn btn-primary text-decoration-none" target="_blank"
                             href="{{ '/storage/' . $suratMagang->document_path }}" role="button">Lihat Surat
                             Persetujuan</a>
                     @endif
                     @if ($cekAbsensiDatang == true)
-                        <a name="" id="" class="btn btn-warning text-decoration-none" href="/absensi"
-                            role="button"><i class="fas fa-clipboard-check"></i> Absensi</a>
+                        <a name="" id="" class="btn btn-warning text-decoration-none"
+                            href="{{ url('absensi') }}" role="button"><i class="fas fa-clipboard-check"></i>
+                            Absensi</a>
                     @endif
                 </div>
-                <form action="/upload-dokumen" method="post" enctype="multipart/form-data">
+                <form action="{{ url('upload-dokumen') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group mb-3">
                         <input class="form-control d-inline" type="hidden" value="{{ $data->id }}"

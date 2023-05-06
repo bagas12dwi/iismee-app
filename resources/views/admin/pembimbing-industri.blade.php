@@ -15,11 +15,11 @@
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
         <div class="col">
-            <a href="/manage-pembimbing-industri/create" class="btn btn-primary float-end">
+            <a href="{{ url('manage-pembimbing-industri/create') }}" class="btn btn-primary float-end">
                 Tambahkan {{ $title }}
             </a>
             @if ($jml > 0)
-                <a href="/konfirmasi-pembimbing-industri" class="btn btn-info float-end me-2 position-relative">
+                <a href="{{ url('konfirmasi-pembimbing-industri') }}" class="btn btn-info float-end me-2 position-relative">
                     Konfirmasi Pendaftaran
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {{ $jml }}
@@ -27,7 +27,7 @@
                     </span>
                 </a>
             @endif
-            <form action="/setRegistrasi" method="post">
+            <form action="{{ url('setRegistrasi') }}" method="post">
                 @csrf
                 <button class="btn {{ $registrasi->is_enable == true ? 'btn-danger' : 'btn-warning' }} float-end me-2"
                     data-toggle="tooltip" onclick="return confirm('Apakah anda yakin?')">

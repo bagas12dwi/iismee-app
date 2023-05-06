@@ -10,12 +10,13 @@
                         <h3 class="h3-large">Internship Information System of Mechanical Enginering Education</h3>
                         <p class="p-large">Merupakan sebuah sistem informasi berbasis web yang digunakan untuk program magang
                             mahasiswa Pendidikan Teknik Mesin Unesa</p>
-                        <a class="btn-solid-lg" href="/magang">Magang</a>
+                        <a class="btn-solid-lg" href="{{ url('magang') }}">Magang</a>
                         @if ($cekAbsensiDatang != true)
-                            <a class="quote text-decoration-none" href="/absensi"><i
+                            <a class="quote text-decoration-none" href="{{ url('absensi') }}"><i
                                     class="fas fa-clipboard-check"></i>Absensi</a>
                         @else
-                            <a class="quote text-decoration-none" href="/logbook"><i class="fas fa-book"></i>Isi Logbook</a>
+                            <a class="quote text-decoration-none" href="{{ url('logbook') }}"><i class="fas fa-book"></i>Isi
+                                Logbook</a>
                         @endif
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->

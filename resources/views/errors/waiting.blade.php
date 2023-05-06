@@ -45,7 +45,7 @@
             <img src="{{ URL::asset('/img/waiting.svg') }}" height="300" alt="">
             <div class="title">Waiting</div>
             <p>Pendaftaran akun anda sedang diproses <br>Harap menunggu atau hubungi Admin</p>
-            <a href="/login"> Kembali ke halaman login</a>
+            <a href="{{ url('login') }}"> Kembali ke halaman login</a>
         </div>
     </div>
 </body>

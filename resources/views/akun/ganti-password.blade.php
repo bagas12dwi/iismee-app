@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-6">
             <div class="my-4">
-                <form action="/gantiPassword" id="form" method="post" enctype="multipart/form-data">
+                <form action="{{ url('gantiPassword') }}" id="form" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="mb-3">

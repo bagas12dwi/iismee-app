@@ -11,8 +11,8 @@
         <div class="card my-3">
             <div class="card-header d-flex">
                 {{ $title }}
-                <a name="" id="" class="btn btn-danger text-decoration-none ms-auto" href="/magang"
-                    role="button"><i class="fas fa-arrow-left"></i>
+                <a name="" id="" class="btn btn-danger text-decoration-none ms-auto"
+                    href="{{ url('magang') }}" role="button"><i class="fas fa-arrow-left"></i>
                     Kembali</a>
             </div>
             <div class="card-body">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <hr>
-                <form action="/laporan" method="post" enctype="multipart/form-data">
+                <form action="{{ url('laporan') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Jenis Laporan</label>

@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('konten')
-    <form action="/manage-dosen" method="POST">
+    <form action="{{ url('manage-dosen') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-6">

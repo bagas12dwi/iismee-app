@@ -8,7 +8,7 @@
         </div>
         @if ($penilaian->is_enable == true)
             <div class="col">
-                <a href="/aspek-penilaian/create" class="btn btn-primary float-end">
+                <a href="{{ url('aspek-penilaian/create') }}" class="btn btn-primary float-end">
                     Tambahkan {{ $title }}
                 </a>
             </div>
@@ -101,13 +101,14 @@
                                                                 </div>
                                                             </td>
                                                             <td class="align-middle">
-                                                                <a href="/aspek-penilaian/{{ $aspek->id }}/edit"
+                                                                <a href="{{ url('/aspek-penilaian/' . $aspek->id . '/edit') }}"
                                                                     class="edit btn font-weight-bold text-xs"
                                                                     data-original-title="Edit user" id="edit">
                                                                     Edit
                                                                 </a>
                                                                 @if ($penilaian->is_enable == true)
-                                                                    <form action="/aspek-penilaian/{{ $aspek->id }}"
+                                                                    <form
+                                                                        action="{{ url('aspek-penilaian/') . $aspek->id }}"
                                                                         method="post" class="d-inline">
                                                                         @method('delete')
                                                                         @csrf

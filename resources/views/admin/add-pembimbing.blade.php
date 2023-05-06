@@ -58,7 +58,7 @@
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <form action="/manage-dpl" method="post" class="d-inline">
+                                        <form action="{{ url('manage-dpl') }}" method="post" class="d-inline">
                                             @csrf
                                             <div class="mb-3">
                                                 <label class="visually-hidden" for="inputName">Hidden input label</label>

@@ -39,7 +39,7 @@
                     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                         <div class="card z-index-0">
                             <div class="card-body">
-                                <form action="/daftar" method="POST">
+                                <form action="{{ url('daftar') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <input type="text" class="form-control" name="name" placeholder="Name"

@@ -3,7 +3,7 @@
      <div class="container">
 
          <!-- Image Logo -->
-         <a class="navbar-brand logo-image" href="/mahasiswa">IISMEE</a>
+         <a class="navbar-brand logo-image" href="{{ url('mahasiswa') }}">IISMEE</a>
 
          <!-- Text Logo - Use this if you don't have a graphic logo -->
          <!-- <a class="navbar-brand logo-text" href="index.html">Zinc</a> -->
@@ -17,13 +17,14 @@
              <ul class="navbar-nav ms-auto me-auto navbar-nav-scroll">
                  <li class="nav-item">
                      <a class="nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" aria-current="page"
-                         href="/mahasiswa">Dashboard</a>
+                         href="{{ url('mahasiswa') }}">Dashboard</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link {{ $title == 'Magang' ? 'active' : '' }}" href="/magang">Magang</a>
+                     <a class="nav-link {{ $title == 'Magang' ? 'active' : '' }}" href="{{ url('magang') }}">Magang</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link {{ $title == 'Logbook' ? 'active' : '' }}" href="/logbook">Logbook</a>
+                     <a class="nav-link {{ $title == 'Logbook' ? 'active' : '' }}"
+                         href="{{ url('logbook') }}">Logbook</a>
                  </li>
              </ul>
              <span class="navbar-nav nav-item">
@@ -35,18 +36,18 @@
                      </a>
                      <ul class="dropdown-menu dropdown-menu-end">
                          <li>
-                             <a class="dropdown-item" href="/profile-user">
+                             <a class="dropdown-item" href="{{ url('profile') }}-user">
                                  <i class="fas fa-user fa-sm me-2"></i>Profil
                              </a>
                          </li>
                          <li>
-                             <a class="dropdown-item" href="/gantiPassword">
+                             <a class="dropdown-item" href="{{ url('gantiPassword') }}">
                                  <i class="fas fa-key fa-sm me-2"></i>Ubah Password
                              </a>
                          </li>
                          <hr>
                          <li>
-                             <form action="/logout" method="POST">
+                             <form action="{{ url('logout') }}" method="POST">
                                  @csrf
                                  <button type="submit" class="dropdown-item">
                                      <i class="fas fa-sign-out-alt fa-sm me-2"></i>Logout

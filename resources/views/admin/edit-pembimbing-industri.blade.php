@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <form action="/manage-pembimbing-industri/{{ $pembimbingIndustri->id }}" method="POST">
+    <form action="{{ url('manage-pembimbing-industri/') . $pembimbingIndustri->id }}" method="POST">
         @method('put')
         @csrf
         <div class="row">

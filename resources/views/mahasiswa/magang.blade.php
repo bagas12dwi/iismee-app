@@ -93,7 +93,7 @@
                 <hr>
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <form action="/upload-dokumen" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('upload-dokumen') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <label for="formFile" class="form-label">Upload Sertifikat Magang</label>
                             <div class="input-group mb-3">
@@ -108,8 +108,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="input-group mb-3">
-                            <a name="#" class="btn btn-danger mt-4 text-decoration-none ms-auto" href="/laporan"
-                                role="button"><i class="far fa-file"></i> Laporan</a>
+                            <a name="#" class="btn btn-danger mt-4 text-decoration-none ms-auto"
+                                href="{{ url('laporan') }}" role="button"><i class="far fa-file"></i> Laporan</a>
                         </div>
                     </div>
                 </div>
