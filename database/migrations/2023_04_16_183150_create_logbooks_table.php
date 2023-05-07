@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('activity_date');
             $table->string('img');
+            $table->text('response')->nullable();
         });
     }
 

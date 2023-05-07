@@ -23,7 +23,9 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
+use App\Http\Controllers\SupervisorLogbookController;
 use App\Http\Controllers\WebSettingController;
+use App\Models\Supervisor;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -70,6 +72,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::get('penilaian/{registration_number}/show', [SupervisorAssessmentController::class, 'showDetails']);
     Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
+    Route::get('logbook-show/{registration_number}', [SupervisorLogbookController::class, 'index']);
+    Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
+    Route::get('logbook-response/{logb0ok_id}/add-response', [SupervisorLogbookController::class, 'responseIndex']);
+    Route::put('add-response', [SupervisorLogbookController::class, 'addResponse']);
 });
 
 // Pembimbing Industri Route

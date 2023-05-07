@@ -49,10 +49,12 @@
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Lihat Logbook</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{{ url('logbook-show/' . $item->student->registration_number) }}">Lihat
+                                            Logbook</a></li>
                                     <li><a class="dropdown-item" href="#">Lihat Laporan</a></li>
                                     @if ($item->document_path)
-                                        <li><a class="dropdown-item" href="{{ '/storage/' . $item->document_path }}"
+                                        <li><a class="dropdown-item" href="{{ url('storage/' . $item->document_path) }}"
                                                 target="_blank">Lihat Surat Balasan</a></li>
                                     @endif
                                 </ul>
