@@ -24,6 +24,7 @@ use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
 use App\Http\Controllers\SupervisorDashboardController;
 use App\Http\Controllers\SupervisorLogbookController;
+use App\Http\Controllers\SupervisorReportController;
 use App\Http\Controllers\WebSettingController;
 use App\Models\Supervisor;
 use Illuminate\Support\Facades\Route;
@@ -74,8 +75,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
     Route::get('logbook-show/{registration_number}', [SupervisorLogbookController::class, 'index']);
     Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
-    Route::get('logbook-response/{logb0ok_id}/add-response', [SupervisorLogbookController::class, 'responseIndex']);
+    Route::get('logbook-response/{logbook_id}/add-response', [SupervisorLogbookController::class, 'responseIndex']);
     Route::put('add-response', [SupervisorLogbookController::class, 'addResponse']);
+    Route::get('laporan-show/{registration_number}', [SupervisorReportController::class, 'index']);
+    Route::get('add-asistensi/{laporan_id}', [SupervisorReportController::class, 'asistensiIndex']);
+    Route::put('add-asistensi', [SupervisorReportController::class, 'asistensi']);
 });
 
 // Pembimbing Industri Route
@@ -87,6 +91,8 @@ Route::group(['middleware' => ['auth', "ceklevel:pembimbing industri"]], functio
     Route::get('penilaian-industri/{registration_number}/edit', [IndustrialAssessmentController::class, 'edit']);
     Route::post('penilaian-industri', [IndustrialAssessmentController::class, 'store']);
     Route::put('penilaian-industri', [IndustrialAssessmentController::class, 'update']);
+    Route::get('logbook-show/{registration_number}', [SupervisorLogbookController::class, 'index']);
+    Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
 });
 
 // Mahasiswa Route

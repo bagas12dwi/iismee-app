@@ -98,9 +98,6 @@
             </div>
         </div>
     </div>
-    <a name="" id="" class="btn btn-info text-decoration-none"
-        href="{{ url('print-logbook/' . $data->registration_number) }}" target="_blank" role="button"><i
-            class="fas fa-file-pdf"></i> Cetak Logbook</a>
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
@@ -114,29 +111,21 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     style="width: 1%!important">No.
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
-                                    Kegiatan
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama File
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis File
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Deskripsi
-                                    Kegiatan
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                                    Validasi
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto
-                                    Kegiatan
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keterangan
                                 </th>
-                                <th
-                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                    Tanggapan</th>
-                                @if (auth()->user()->level == 'pembimbing')
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                    </th>
-                                @endif
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($logbook as $key => $item)
+                            @foreach ($laporan as $key => $item)
                                 <tr>
                                     <td>
                                         <div class="my-auto">
@@ -148,48 +137,43 @@
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $item->activity_name }}
+                                                {{ $item->name }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $item->activity_date }}
+                                                {{ $item->type }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $item->description }}
+                                                {{ $item->validation_status }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
                                             <h6 class="mb-0 text-sm">
-                                                <img src="{{ URL::asset('storage/' . $item->img) }}" alt=""
-                                                    style="height: 100px">
+                                                {{ $item->information ?? '-' }}
                                             </h6>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
-                                                {{ $item->response ?? '-' }}
-                                            </h6>
-                                        </div>
+                                    <td class="align-middle text-center">
+                                        <a href="{{ url('storage/' . $item->document_path) }}" target="_blank"
+                                            class="btn btn-info font-weight-bold text-xs" data-original-title="Edit user"
+                                            id="edit">
+                                            Lihat
+                                        </a>
+                                        <a href="{{ url('add-asistensi/' . $item->id) }}"
+                                            class="btn btn-warning font-weight-bold text-xs"
+                                            data-original-title="Edit user" id="edit">
+                                            Berikan Asistensi
+                                        </a>
                                     </td>
-                                    @if (auth()->user()->level == 'pembimbing')
-                                        <td class="align-middle text-center">
-                                            <a href="{{ url('logbook-response/' . $item->id . '/add-response') }}"
-                                                class="btn btn-warning font-weight-bold text-xs"
-                                                data-original-title="Edit user" id="edit">
-                                                Berikan Tanggapan
-                                            </a>
-                                        </td>
-                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
