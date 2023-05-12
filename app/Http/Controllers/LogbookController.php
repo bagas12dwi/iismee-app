@@ -52,6 +52,7 @@ class LogbookController extends Controller
         $data = Logbook::where('student_id', '=', $mhs->id)->get();
 
         $pdf = Pdf::loadView('mahasiswa.print-logbook', [
+            'title' => 'Cetak Logbook',
             'data' => $data,
             'mhs' => $mhs
         ]);

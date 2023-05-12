@@ -34,6 +34,7 @@ class IndustrialAssessmentController extends Controller
             ->orderBy('is_assessment', 'asc')
             ->get();
 
+
         return view('pembimbing-industri.penilaian', [
             'title' => 'Penilaian',
             'mahasiswa' => $is_assessment,

@@ -108,16 +108,16 @@
                     <table class="table align-items-center mb-0" id="datatable">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7"
                                     style="width: 1%!important">No.
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mata Kuliah
+                                <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7">Mata Kuliah
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIP
+                                <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7">NIP
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Dosen
+                                <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7">Nama Dosen
                                     Pengajar</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7 text-center">
                                     Nilai</th>
                             </tr>
                         </thead>
@@ -126,35 +126,35 @@
                                 <tr>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm text-center">
+                                            <h6 class="mb-0 text-m text-center">
                                                 {{ $key + 1 }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
+                                            <h6 class="mb-0 text-m">
                                                 {{ $item->subject_name }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
+                                            <h6 class="mb-0 text-m">
                                                 {{ $item->lecturer_id_number }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm">
+                                            <h6 class="mb-0 text-m">
                                                 {{ $item->name }}
                                             </h6>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="my-auto">
-                                            <h6 class="mb-0 text-sm text-center">
+                                            <h6 class="mb-0 text-m text-center">
                                                 {{ $item->nilai }}
                                             </h6>
                                         </div>
@@ -168,11 +168,11 @@
                                                     id="datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                                            <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7"
                                                                 style="width: 90%!important">
                                                                 Aspek Penilaian</th>
                                                             <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 text-center">
                                                                 Skor</th>
                                                         </tr>
                                                     </thead>

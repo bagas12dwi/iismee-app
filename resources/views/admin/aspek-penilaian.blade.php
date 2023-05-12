@@ -6,7 +6,7 @@
         <div class="col">
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
-        @if ($penilaian->is_enable == true)
+        @if ($penilaian->is_enable == false)
             <div class="col">
                 <a href="{{ url('aspek-penilaian/create') }}" class="btn btn-primary float-end">
                     Tambahkan {{ $title }}
@@ -106,7 +106,7 @@
                                                                     data-original-title="Edit user" id="edit">
                                                                     Edit
                                                                 </a>
-                                                                @if ($penilaian->is_enable == true)
+                                                                @if ($penilaian->is_enable == false)
                                                                     <form
                                                                         action="{{ url('aspek-penilaian/') . $aspek->id }}"
                                                                         method="post" class="d-inline">

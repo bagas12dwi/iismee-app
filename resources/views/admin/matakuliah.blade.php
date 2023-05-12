@@ -6,7 +6,7 @@
             <h4 class="mb-4">Manage {{ $title }}</h4>
         </div>
         <div class="col">
-            @if ($penilaian->is_enable == true)
+            @if ($penilaian->is_enable == false)
                 <a href="{{ url('manage-matakuliah/create') }}" class="btn btn-primary float-end">
                     Tambahkan {{ $title }}
                 </a>
@@ -84,7 +84,7 @@
                                             id="edit">
                                             Edit
                                         </a>
-                                        @if ($penilaian->is_enable == true)
+                                        @if ($penilaian->is_enable == false)
                                             <form action="manage-matakuliah/{{ $data->subject_name }}" method="post"
                                                 class="d-inline">
                                                 @method('delete')

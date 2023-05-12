@@ -22,6 +22,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentInternshipController;
 use App\Http\Controllers\SupervisorAssessmentController;
+use App\Http\Controllers\SupervisorAttendanceController;
 use App\Http\Controllers\SupervisorDashboardController;
 use App\Http\Controllers\SupervisorLogbookController;
 use App\Http\Controllers\SupervisorReportController;
@@ -74,12 +75,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:pembimbing']], function () {
     Route::post('penilaian', [SupervisorAssessmentController::class, 'store']);
     Route::put('penilaian', [SupervisorAssessmentController::class, 'update']);
     Route::get('logbook-show/{registration_number}', [SupervisorLogbookController::class, 'index']);
-    Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
     Route::get('logbook-response/{logbook_id}/add-response', [SupervisorLogbookController::class, 'responseIndex']);
     Route::put('add-response', [SupervisorLogbookController::class, 'addResponse']);
     Route::get('laporan-show/{registration_number}', [SupervisorReportController::class, 'index']);
     Route::get('add-asistensi/{laporan_id}', [SupervisorReportController::class, 'asistensiIndex']);
     Route::put('add-asistensi', [SupervisorReportController::class, 'asistensi']);
+    Route::get('cetak-penilaian', [SupervisorAssessmentController::class, 'cetakPenilaian']);
+    Route::get('cetak-absensi/{registration_number}', [SupervisorAttendanceController::class, 'printAbsensi']);
 });
 
 // Pembimbing Industri Route
@@ -91,8 +93,7 @@ Route::group(['middleware' => ['auth', "ceklevel:pembimbing industri"]], functio
     Route::get('penilaian-industri/{registration_number}/edit', [IndustrialAssessmentController::class, 'edit']);
     Route::post('penilaian-industri', [IndustrialAssessmentController::class, 'store']);
     Route::put('penilaian-industri', [IndustrialAssessmentController::class, 'update']);
-    Route::get('logbook-show/{registration_number}', [SupervisorLogbookController::class, 'index']);
-    Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
+    Route::get('logbook-shows/{registration_number}', [SupervisorLogbookController::class, 'index']);
 });
 
 // Mahasiswa Route
@@ -113,6 +114,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:mahasiswa']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('gantiPassword', [ProfileController::class, 'indexGantiPassword']);
     Route::put('gantiPassword', [ProfileController::class, 'gantiPassword']);
+    Route::get('print-logbook/{registration_number}', [SupervisorLogbookController::class, 'printLogbook']);
 });
 
 //auth Controller

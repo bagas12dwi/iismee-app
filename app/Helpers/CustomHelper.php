@@ -67,6 +67,28 @@ class CustomHelper
         return $date;
     }
 
+    public function convertDate($tanggal)
+    {
+        $date = Carbon::parse($tanggal);
+        $hari = $date->locale('id_ID')->dayName;
+
+        $date = "$hari, " . $date->format('d-m-Y');
+
+        return $date;
+    }
+
+    public function awalBulan($bulan)
+    {
+        $tanggal = Carbon::createFromDate(null, $bulan, 1)->startOfMonth();
+        return $tanggal->toDateString();
+    }
+
+    public function akhirBulan($bulan)
+    {
+        $tanggal = Carbon::createFromDate(null, $bulan, 1)->startOfMonth()->addMonth(1);
+        return $tanggal->toDateString();
+    }
+
     public function konversiNilai($nilai)
     {
         $hasil = $nilai / 100 * 4;

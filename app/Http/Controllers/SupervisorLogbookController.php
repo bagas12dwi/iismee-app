@@ -11,7 +11,6 @@ class SupervisorLogbookController extends Controller
 {
     public function index($registration_number)
     {
-
         $mhs = Student::with('company')->where('registration_number', '=', $registration_number)->firstOrFail();
 
         return view('pembimbing.logbook', [
@@ -48,7 +47,8 @@ class SupervisorLogbookController extends Controller
 
         $pdf = Pdf::loadView('mahasiswa.print-logbook', [
             'data' => $data,
-            'mhs' => $mhs
+            'mhs' => $mhs,
+            'title' => 'Cetak Logbook'
         ]);
 
         return $pdf->stream('logbook.pdf');

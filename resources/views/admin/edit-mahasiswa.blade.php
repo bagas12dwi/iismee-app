@@ -108,7 +108,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: '/getDataPerusahaan',
+                url: './getDataPerusahaan',
                 data: {
                     company_id: company_id
                 },

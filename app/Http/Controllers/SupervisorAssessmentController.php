@@ -11,6 +11,8 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\WebSetting;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,13 +22,6 @@ class SupervisorAssessmentController extends Controller
     {
         $email = auth()->user()->email;
         $dosen = Lecturer::where('email', '=', $email)->firstOrFail();
-
-        // $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path')
-        //     ->leftJoin('students', 'internships.student_id', '=', 'students.id')
-        //     ->leftJoin('documents', 'students.id', '=', 'documents.student_id')
-        //     ->where('lecturer_id', $dosen->id)
-        //     ->where('documents.type', '=', 'Surat Persetujuan Magang')
-        //     ->get();
 
         $is_assessment = Internship::selectRaw('IF(internships.student_id IN (SELECT assessments.student_id FROM assessments), true, false) AS is_assessment, internships.*, documents.document_path, companies.*')
             ->leftJoin('students', 'internships.student_id', '=', 'students.id')
@@ -39,6 +34,7 @@ class SupervisorAssessmentController extends Controller
             ->orderBy('is_assessment', 'asc')
             ->get();
 
+
         $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
 
         return view('pembimbing.penilaian', [
@@ -46,6 +42,63 @@ class SupervisorAssessmentController extends Controller
             'mahasiswa' => $is_assessment,
             'penilaian' => $penilaian
         ]);
+    }
+
+    public function cetakPenilaian()
+    {
+        $dosen = Lecturer::where('email', '=', auth()->user()->email)->firstOrFail();
+        // dd($dosen->id);
+
+        $notEvaluated = Student::selectRaw("students.*, '-' AS matakuliah1, '-' AS matakuliah2, '-' AS matakuliah3")
+            ->join('internships', 'internships.student_id', '=', 'students.id')
+            ->where('internships.lecturer_id', '=', $dosen->id)
+            ->whereNotIn('students.id', Assessment::select('student_id')->get())
+            ->groupBy('students.id')
+            ->get();
+
+        // dd($notEvaluated);
+
+        $data = Student::selectRaw("students.name, students.registration_number, 
+        COALESCE(
+            (SELECT ROUND((SUM(assessments.score)/(subjects.max_score*COUNT(assesment_aspects.id))*100), 2) AS nilai
+            FROM assessments 
+            JOIN assesment_aspects ON assesment_aspects.id = assessments.assesment_aspect_id
+            JOIN subjects ON subjects.id = assessments.subject_id
+            WHERE subjects.id = 1 AND assessments.student_id = students.id), 
+            '-'
+        ) AS matakuliah1,
+        COALESCE(
+            (SELECT ROUND((SUM(assessments.score)/(subjects.max_score*COUNT(assesment_aspects.id))*100), 2) AS nilai
+            FROM assessments 
+            JOIN assesment_aspects ON assesment_aspects.id = assessments.assesment_aspect_id
+            JOIN subjects ON subjects.id = assessments.subject_id
+            WHERE subjects.id = 2 AND assessments.student_id = students.id), 
+            '-'
+        ) AS matakuliah2,
+        COALESCE(
+            (SELECT ROUND((SUM(assessments.score)/(subjects.max_score*COUNT(assesment_aspects.id))*100), 2) AS nilai
+            FROM assessments 
+            JOIN assesment_aspects ON assesment_aspects.id = assessments.assesment_aspect_id
+            JOIN subjects ON subjects.id = assessments.subject_id
+            WHERE subjects.id = 3 AND assessments.student_id = students.id), 
+            '-'
+        ) AS matakuliah3")
+            ->leftJoin('assessments', 'students.id', '=', 'assessments.student_id')
+            ->join('subjects', 'subjects.id', '=', 'assessments.subject_id')
+            ->join('assesment_aspects', 'assesment_aspects.id', '=', 'assessments.assesment_aspect_id')
+            ->join('internships', 'students.id', '=', 'internships.student_id')
+            ->groupBy('students.name')
+            ->where('internships.lecturer_id', '=', $dosen->id)
+            ->get();
+
+        $data = $data->concat($notEvaluated);
+
+        $pdf = Pdf::loadView('pembimbing.print-penilaian', [
+            'data' => $data,
+            'title' => 'Cetak Penilaian'
+        ]);
+
+        return $pdf->stream('penilaian.pdf');
     }
 
     public function show(Request $request, $registration_number)
