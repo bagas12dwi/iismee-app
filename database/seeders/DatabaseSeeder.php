@@ -34,5 +34,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Registrasi Pembimbing Industri',
             'is_enable' => true
         ]);
+
+        WebSetting::factory()->create([
+            'name' => 'Periode Penilaian',
+            'is_enable' => true
+        ]);
     }
 }
