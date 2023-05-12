@@ -29,7 +29,7 @@ class AdminSubjectController extends Controller
     public function create()
     {
         $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
-        if ($penilaian->is_enable == true) {
+        if ($penilaian->is_enable == false) {
             return view('admin.add-matakuliah', [
                 'title' => 'Tambahkan Mata Kuliah',
                 'dosen' => Lecturer::all()

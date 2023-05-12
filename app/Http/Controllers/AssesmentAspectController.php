@@ -35,7 +35,7 @@ class AssesmentAspectController extends Controller
     {
         $penilaian = WebSetting::where('name', '=', 'Periode Penilaian')->firstOrFail();
 
-        if ($penilaian->is_enable == true) {
+        if ($penilaian->is_enable == false) {
             return view('admin.add-aspek-penilaian', [
                 'title' => 'Tambahkan Aspek Penilaian',
                 'matakuliah' => Subject::all()
