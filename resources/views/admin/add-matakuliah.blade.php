@@ -14,6 +14,10 @@
                     <input type="number" class="form-control" name="sks" id="sks">
                 </div>
                 <div class="mb-3">
+                    <label for="max_score" class="form-label">Skor Maksimal Per Aspek</label>
+                    <input type="number" class="form-control" name="max_score" id="max_score">
+                </div>
+                <div class="mb-3">
                     <label for="lecturer_id" class="form-label">Dosen Pengajar</label>
                     <select class="form-select" name="lecturer_id" id="lecturer_id" aria-label="Default select example">
                         <option selected>Pilih Dosen Pengajar</option>

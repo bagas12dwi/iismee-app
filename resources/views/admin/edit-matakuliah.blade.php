@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ url('manage-matakuliah/') . $matakuliah->subject_name }}" method="POST">
+    <form action="{{ url('manage-matakuliah/' . $matakuliah->subject_name) }}" method="POST">
         @method('put')
         @csrf
         <div class="row">
@@ -21,9 +21,14 @@
                         value="{{ old('subject_name', $matakuliah->subject_name) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="sks" class="form-label">Nama Mata Kuliah</label>
-                    <input type="text" class="form-control" name="sks" id="sks"
+                    <label for="sks" class="form-label">SKS</label>
+                    <input type="number" class="form-control" name="sks" id="sks"
                         value="{{ old('sks', $matakuliah->sks) }}">
+                </div>
+                <div class="mb-3">
+                    <label for="max_score" class="form-label">Skor Maksimal Per Aspek</label>
+                    <input type="number" class="form-control" name="max_score" id="max_score"
+                        value="{{ old('max_score', $matakuliah->max_score) }}">
                 </div>
                 <div class="mb-3">
                     <label for="lecturer_id" class="form-label">Dosen Pengajar</label>

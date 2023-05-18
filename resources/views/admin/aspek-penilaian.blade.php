@@ -96,7 +96,7 @@
                                                             <td style="white-space: normal !important">
                                                                 <div class="my-auto">
                                                                     <h6 class="mb-0 text-sm">
-                                                                        {{ $aspek->description }}
+                                                                        {!! $aspek->description !!}
                                                                     </h6>
                                                                 </div>
                                                             </td>

@@ -114,6 +114,6 @@ class AdminLecturerController extends Controller
         $email = $manage_dosen->email;
         User::where('email', $email)->delete();
         Lecturer::destroy($manage_dosen->id);
-        return redirect('/manage-mahasiswa')->with('success', 'Data Berhasil Dihapus !');
+        return redirect('/manage-dosen')->with('success', 'Data Berhasil Dihapus !');
     }
 }

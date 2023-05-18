@@ -112,7 +112,7 @@
                                                     <li>
                                                         <h6> {{ $item->name }} </h6>
                                                         <p class="text-muted" style="font-size: 10pt!important">
-                                                            {{ $item->description }} </p>
+                                                            {!! $item->description !!} </p>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -24,7 +24,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Aspek Penilaian</label>
-                    <textarea class="form-control" name="description" id="description" rows="3">{{ old('description', $aspek->description) }}</textarea>
+                    <input id="description" type="hidden" name="description"
+                        value="{{ old('description', $aspek->description) }}">
+                    <trix-editor input="description"></trix-editor>
                 </div>
             </div>
         </div>

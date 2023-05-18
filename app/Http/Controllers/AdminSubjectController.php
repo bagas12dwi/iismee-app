@@ -47,7 +47,8 @@ class AdminSubjectController extends Controller
         $validatedData = $request->validate([
             'subject_name' => 'required',
             'lecturer_id' => 'required',
-            'sks' => 'required'
+            'sks' => 'required',
+            'max_score' => 'required'
         ]);
 
         Subject::create($validatedData);
@@ -82,7 +83,8 @@ class AdminSubjectController extends Controller
         $validatedData = $request->validate([
             'subject_name' => 'required',
             'lecturer_id' => 'required',
-            'sks' => 'required'
+            'sks' => 'required',
+            'max_score' => 'required'
         ]);
 
         Subject::where('id', $manage_matakuliah->id)->update($validatedData);

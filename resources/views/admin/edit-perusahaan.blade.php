@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('konten')
-    <form action="{{ url('manage-perusahaan/') . $perusahaan->id }}" method="POST">
+    <form action="{{ url('manage-perusahaan/' . $perusahaan->id) }}" method="POST">
         @method('put')
         @csrf
         <div class="row">

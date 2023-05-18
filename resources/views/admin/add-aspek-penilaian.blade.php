@@ -20,7 +20,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Deskripsi Penilaian</label>
-                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                    <input id="description" type="hidden" name="description">
+                    <trix-editor input="description"></trix-editor>
                 </div>
             </div>
         </div>
