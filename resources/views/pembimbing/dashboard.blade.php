@@ -10,7 +10,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Mahasiswa</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $jmlGuru }} --}}
+                                    {{ $mahasiswa }}
                                 </h5>
                             </div>
                         </div>

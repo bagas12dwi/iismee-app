@@ -59,10 +59,11 @@
     <script>
         $('#company_id').change(function() {
             var company_id = $(this).val();
+            var url = "{{ url('getDataPerusahaan') }}";
 
             $.ajax({
                 type: 'GET',
-                url: './getDataPerusahaan',
+                url: url,
                 data: {
                     company_id: company_id
                 },

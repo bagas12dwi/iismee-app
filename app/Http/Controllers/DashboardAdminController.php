@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\IndustrialAdviser;
+use App\Models\Lecturer;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
@@ -11,8 +16,20 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
+        $student = Student::all();
+        $dosen = Lecturer::all();
+        $pembimbingIndustri = IndustrialAdviser::all();
+        $perusahaan = Company::all();
+        $pembimbing = User::where('level', '=', 'pembimbing industri')
+            ->where('is_active', '=', false)->get();
+
         return view('admin.dashboard', [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'mahasiswa' => $student->count(),
+            'dosen' => $dosen->count(),
+            'pembimbingIndustri' => $pembimbingIndustri->count(),
+            'perusahaan' => $perusahaan->count(),
+            'jml' => $pembimbing->count()
         ]);
     }
 
