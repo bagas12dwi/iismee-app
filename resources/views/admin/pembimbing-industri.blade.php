@@ -94,12 +94,12 @@
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="manage-pembimbing-industri/{{ $data->id }}/edit"
+                                        <a href="{{ url('manage-pembimbing-industri/' . $data->id . '/edit') }}"
                                             class="edit btn font-weight-bold text-xs" data-original-title="Edit user"
                                             id="edit">
                                             Edit
                                         </a>
-                                        <form action="manage-pembimbing-industri/{{ $data->id }}" method="post"
+                                        <form action="{{ url('manage-pembimbing-industri/' . $data->id) }}" method="post"
                                             class="d-inline">
                                             @method('delete')
                                             @csrf
