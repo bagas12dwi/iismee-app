@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('konten')
-    <form action="{{ url('aspek-penilaian/') . $aspek->id }}" method="POST">
+    <form action="{{ url('aspek-penilaian/' . $aspek->id) }}" method="POST">
         @method('put')
         @csrf
         <div class="row">
