@@ -26,7 +26,7 @@ class StudentController extends Controller
 
         return view('mahasiswa.dashboard', [
             'title' => 'Dashboard',
-            'cekAbsensiDatang' => $cekAbsensiDatang->is_absen,
+            'cekAbsensiDatang' => $cekAbsensiDatang->is_absen ?? false,
         ]);
     }
 
